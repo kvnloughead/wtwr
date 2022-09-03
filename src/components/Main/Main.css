@@ -1,3 +1,19 @@
 .main {
   padding-top: 32px;
 }
+
+.main__cards {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 34px 0 0;
+}
+
+.main__text {
+  margin-top: 40px;
+  font-size: 20px;
+  line-height: 1.25;
+}
