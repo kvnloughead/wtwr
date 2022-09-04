@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes, { number, string } from 'prop-types';
+
 import './ItemCard.css';
 
 function ItemCard({ data }) {
@@ -13,5 +15,14 @@ function ItemCard({ data }) {
     </li>
   );
 }
+
+ItemCard.propTypes = {
+  data: PropTypes.shape({
+    _id: number,
+    name: string,
+    weather: string,
+    link: string,
+  }).isRequired,
+};
 
 export default ItemCard;

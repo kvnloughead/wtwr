@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import logo from '../../images/logo.svg';
 import avatar from '../../images/placeholder.png';
 import './Header.css';
@@ -18,11 +20,13 @@ function Header({ openAddModal }) {
         <time className="header__time" dateTime={date}>
           {date}
         </time>
-        ,
-        {' '}
-        {city}
+        , {city}
       </p>
-      <button className="header__add-clothes-button" onClick={openAddModal}>
+      <button
+        className="header__add-clothes-button"
+        type="button"
+        onClick={openAddModal}
+      >
         + Add Clothes
       </button>
       <p className="header__username">Kevin Loughead</p>
@@ -30,5 +34,9 @@ function Header({ openAddModal }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  openAddModal: PropTypes.func.isRequired,
+};
 
 export default Header;
