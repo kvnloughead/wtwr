@@ -1,8 +1,12 @@
 import { func, string, oneOfType, arrayOf, node } from 'prop-types';
 import React from 'react';
+
+import useEscape from '../../hooks/useEscape';
 import './ModalWithForm.css';
 
 function ModalWithForm({ activeModal, closeModal, title, children }) {
+  useEscape(closeModal);
+
   return (
     <div
       className={`modal modal_type_${activeModal} ${

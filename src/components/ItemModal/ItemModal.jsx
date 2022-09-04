@@ -1,9 +1,11 @@
 import { shape, number, string, func } from 'prop-types';
 import React from 'react';
 
+import useEscape from '../../hooks/useEscape';
 import './ItemModal.css';
 
 function ItemModal({ card, closeModal, activeModal }) {
+  useEscape(closeModal);
   return (
     <div className={`modal ${activeModal === 'preview' && 'modal_is-open'}`}>
       <div className="modal__container modal__container_type_preview">
