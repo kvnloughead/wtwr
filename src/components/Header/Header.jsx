@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { func } from 'prop-types';
 
 import logo from '../../images/logo.svg';
 import avatar from '../../images/placeholder.png';
@@ -36,7 +36,7 @@ function Header({ openAddModal }) {
 }
 
 Header.propTypes = {
-  openAddModal: PropTypes.func.isRequired,
+  openAddModal: func.isRequired,
 };
 
 export default Header;

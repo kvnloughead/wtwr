@@ -5,11 +5,15 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import FormContents from '../FormContents/FormContents';
-import './App.css';
 import ItemModal from '../ItemModal/ItemModal';
+import './App.css';
+
+import { location, apiKey } from '../../utils/constants';
+import getWeather from '../../utils/weatherApi';
 
 function App() {
   const [activeModal, setActiveModal] = React.useState('');
+  const [weather, setWeather] = React.useState({ tempF: NaN });
   const [selectedCard, setSelectedCard] = React.useState({
     _id: -1,
     name: '',
@@ -35,11 +39,17 @@ function App() {
     }, 500);
   };
 
+  React.useEffect(() => {
+    getWeather(location, apiKey).then((data) =>
+      setWeather({ tempF: data.current.temp_f })
+    );
+  }, []);
+
   return (
     <div className="page">
       <div className="page__wrapper">
         <Header openAddModal={openAddModal} />
-        <Main openItemModal={openItemModal} />
+        <Main openItemModal={openItemModal} weather={weather} />
         <Footer />
         <ModalWithForm
           activeModal={activeModal}

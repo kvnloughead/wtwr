@@ -1,5 +1,5 @@
 import React from 'react';
-import { func } from 'prop-types';
+import { shape, func, number } from 'prop-types';
 
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
@@ -44,11 +44,13 @@ const defaultClothingItems = [
   },
 ];
 
-function Main({ openItemModal }) {
+function Main({ openItemModal, weather }) {
   return (
     <main className="main">
-      <WeatherCard />
-      <h2 className="main__text">Today is 75° F / You may want to wear:</h2>
+      <WeatherCard weather={weather} />
+      <h2 className="main__text">
+        {`Today is ${weather.tempF}° F / You may want to wear:`}
+      </h2>
       <ul className="main__cards">
         {defaultClothingItems.map((item) => (
           <ItemCard key={item._id} data={item} openItemModal={openItemModal} />
@@ -60,6 +62,7 @@ function Main({ openItemModal }) {
 
 Main.propTypes = {
   openItemModal: func.isRequired,
+  weather: shape({ tempF: number }).isRequired,
 };
 
 export default Main;
