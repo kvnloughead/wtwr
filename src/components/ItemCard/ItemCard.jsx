@@ -1,11 +1,15 @@
 import React from 'react';
-import PropTypes, { number, string } from 'prop-types';
+import PropTypes, { func, number, string } from 'prop-types';
 
 import './ItemCard.css';
 
-function ItemCard({ data }) {
+function ItemCard({ data, openItemModal }) {
   return (
-    <li className="card">
+    <li
+      role="presentation"
+      className="card"
+      onClick={() => openItemModal({ ...data, visible: true })}
+    >
       <h3 className="card__name">{data.name}</h3>
       <img
         className="card__image"
@@ -23,6 +27,7 @@ ItemCard.propTypes = {
     weather: string,
     link: string,
   }).isRequired,
+  openItemModal: func.isRequired,
 };
 
 export default ItemCard;

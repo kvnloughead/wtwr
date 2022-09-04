@@ -1,4 +1,5 @@
 import React from 'react';
+import { func } from 'prop-types';
 
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
@@ -43,18 +44,22 @@ const defaultClothingItems = [
   },
 ];
 
-function Main() {
+function Main({ openItemModal }) {
   return (
     <main className="main">
       <WeatherCard />
       <h2 className="main__text">Today is 75° F / You may want to wear:</h2>
       <ul className="main__cards">
         {defaultClothingItems.map((item) => (
-          <ItemCard key={item._id} data={item} />
+          <ItemCard key={item._id} data={item} openItemModal={openItemModal} />
         ))}
       </ul>
     </main>
   );
 }
+
+Main.propTypes = {
+  openItemModal: func.isRequired,
+};
 
 export default Main;
