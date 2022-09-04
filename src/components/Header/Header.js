@@ -3,7 +3,7 @@ import logo from '../../images/logo.svg';
 import avatar from '../../images/placeholder.png';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ openAddModal }) => {
   const date = new Date().toLocaleString('default', {
     month: 'long',
     day: 'numeric',
@@ -20,7 +20,9 @@ const Header = () => {
         </time>
         , {city}
       </p>
-      <button className='header__add-clothes-button'>+ Add Clothes</button>
+      <button className='header__add-clothes-button' onClick={openAddModal}>
+        + Add Clothes
+      </button>
       <p className='header__username'>Kevin Loughead</p>
       <img className='header__avatar' src={avatar} alt="User's avatar" />
     </header>

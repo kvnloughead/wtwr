@@ -4,7 +4,7 @@ import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
 import './Main.css';
 
-const deafultClothingItems = [
+const defaultClothingItems = [
   {
     _id: 0,
     name: 'Cap',
@@ -49,8 +49,8 @@ const Main = () => {
       <WeatherCard></WeatherCard>
       <h2 className='main__text'>Today is 75° F / You may want to wear:</h2>
       <ul className='main__cards'>
-        {deafultClothingItems.map((item) => (
-          <ItemCard data={item} />
+        {defaultClothingItems.map((item) => (
+          <ItemCard key={item._id} data={item} />
         ))}
       </ul>
     </main>
