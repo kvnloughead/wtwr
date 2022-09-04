@@ -43,18 +43,18 @@ const defaultClothingItems = [
   },
 ];
 
-const Main = () => {
+function Main() {
   return (
-    <main className='main'>
-      <WeatherCard></WeatherCard>
-      <h2 className='main__text'>Today is 75° F / You may want to wear:</h2>
-      <ul className='main__cards'>
+    <main className="main">
+      <WeatherCard />
+      <h2 className="main__text">Today is 75° F / You may want to wear:</h2>
+      <ul className="main__cards">
         {defaultClothingItems.map((item) => (
           <ItemCard key={item._id} data={item} />
         ))}
       </ul>
     </main>
   );
-};
+}
 
 export default Main;
