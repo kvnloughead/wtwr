@@ -15,15 +15,35 @@
   cursor: pointer;
 }
 
+.card__header {
+  position: absolute;
+  top: 12px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .card__name {
   padding: 2px 12px;
   background-color: #fff;
   border-radius: 4px;
   font-size: 16px;
   line-height: 1.25;
-  position: absolute;
-  top: 12px;
-  z-index: 1;
+}
+
+.card__like-button {
+  background-image: url('../../images/heart-empty.png');
+  border: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 15px;
+  background-color: transparent;
+}
+
+.card__like-button_liked {
+  background-image: url('../../images/heart-full.png');
 }
 
 .card__image {
