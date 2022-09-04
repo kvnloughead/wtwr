@@ -3,6 +3,7 @@ import { shape, func, number } from 'prop-types';
 
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
+import { getTempDescriptor } from '../../utils/weatherApi';
 import './Main.css';
 
 const defaultClothingItems = [
@@ -52,9 +53,15 @@ function Main({ openItemModal, weather }) {
         {`Today is ${weather.tempF}° F / You may want to wear:`}
       </h2>
       <ul className="main__cards">
-        {defaultClothingItems.map((item) => (
-          <ItemCard key={item._id} data={item} openItemModal={openItemModal} />
-        ))}
+        {defaultClothingItems
+          .filter((item) => item.weather === getTempDescriptor(weather.tempF))
+          .map((item) => (
+            <ItemCard
+              key={item._id}
+              data={item}
+              openItemModal={openItemModal}
+            />
+          ))}
       </ul>
     </main>
   );

@@ -3,4 +3,7 @@ const getWeather = ({ latitude, longitude }, key) =>
     `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${latitude},${longitude}&days=1`
   ).then((res) => res.json());
 
-export default getWeather;
+const getTempDescriptor = (tempF) =>
+  tempF > 80 ? 'hot' : tempF > 60 ? 'warm' : 'cold';
+
+export { getWeather, getTempDescriptor };

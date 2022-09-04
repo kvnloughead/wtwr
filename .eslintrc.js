@@ -19,5 +19,6 @@ module.exports = {
       },
     ],
     'no-underscore-dangle': 0,
+    'no-nested-ternary': 'off',
   },
 };

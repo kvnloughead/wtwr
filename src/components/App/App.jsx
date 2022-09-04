@@ -9,7 +9,7 @@ import ItemModal from '../ItemModal/ItemModal';
 import './App.css';
 
 import { location, apiKey } from '../../utils/constants';
-import getWeather from '../../utils/weatherApi';
+import { getWeather } from '../../utils/weatherApi';
 
 function App() {
   const [activeModal, setActiveModal] = React.useState('');
