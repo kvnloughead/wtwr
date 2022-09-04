@@ -11,6 +11,10 @@
   position: relative;
 }
 
+.card:hover {
+  cursor: pointer;
+}
+
 .card__name {
   padding: 2px 12px;
   background-color: #fff;

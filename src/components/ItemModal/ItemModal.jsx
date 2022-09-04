@@ -18,10 +18,8 @@ function ItemModal({ card, closeModal, activeModal }) {
           src={card.link}
           alt={`A ${card.name} for wearing in ${card.weather} weather.`}
         />
-        <div className="modal__footer">
-          <h3 className="modal__name">{card.name}</h3>
-          <p className="modal__weather">Weather: {card.weather}</p>
-        </div>
+        <h3 className="modal__caption">{card.name}</h3>
+        <p className="modal__weather">Weather: {card.weather}</p>
       </div>
     </div>
   );

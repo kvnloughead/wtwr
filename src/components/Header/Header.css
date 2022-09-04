@@ -27,6 +27,11 @@
   line-height: 1.2;
 }
 
+.header__add-clothes-button:hover {
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
 .header__username {
   margin-right: 12px;
   font-size: 20px;
