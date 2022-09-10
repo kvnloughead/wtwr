@@ -90,7 +90,7 @@
 
   .header__add-clothes-button::after {
     content: '';
-    background-image: url('../../images/plus.jpg');
+    background-image: url('../../images/plus.svg');
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: contain;
