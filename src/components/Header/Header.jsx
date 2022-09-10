@@ -1,17 +1,15 @@
 import React from 'react';
-import { func } from 'prop-types';
+import { func, number, shape, string } from 'prop-types';
 
 import logo from '../../images/logo.svg';
 import avatar from '../../images/placeholder.png';
 import './Header.css';
 
-function Header({ openAddModal }) {
+function Header({ openAddModal, location }) {
   const date = new Date().toLocaleString('default', {
     month: 'long',
     day: 'numeric',
   });
-
-  const city = 'Pottstown';
 
   return (
     <header className="header">
@@ -20,7 +18,7 @@ function Header({ openAddModal }) {
         <time className="header__time" dateTime={date}>
           {date}
         </time>
-        , {city}
+        , {location.city}
       </p>
       <button
         className="header__add-clothes-button"
@@ -37,6 +35,8 @@ function Header({ openAddModal }) {
 
 Header.propTypes = {
   openAddModal: func.isRequired,
+  location: shape({ latitude: number, longitude: number, city: string })
+    .isRequired,
 };
 
 export default Header;

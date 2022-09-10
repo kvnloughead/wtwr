@@ -20,5 +20,6 @@ module.exports = {
     ],
     'no-underscore-dangle': 0,
     'no-nested-ternary': 'off',
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
   },
 };
