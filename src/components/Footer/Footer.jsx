@@ -4,10 +4,12 @@ import './Footer.css';
 function Footer() {
   return (
     <footer className="footer">
-      <span className="footer__text">
-        Developed by Practicum Grad Kevin Loughead
-      </span>
-      <span className="footer__year">2022</span>
+      <div className="footer__text">
+        <span>Designed by Practicum</span>
+        <span>Developed by Kevin Loughead</span>
+      </div>
+
+      <p className="footer__year">2022</p>
     </footer>
   );
 }

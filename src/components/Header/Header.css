@@ -11,12 +11,14 @@
   margin-right: 24px;
   width: 89px;
   height: 40px;
+  grid-area: logo;
 }
 
 .header__time-and-place {
-  margin-right: auto;
+  margin: 0 auto 0 0;
   font-size: 20px;
   line-height: 1.2;
+  grid-area: time-and-place;
 }
 
 .header__add-clothes-button {
@@ -25,6 +27,7 @@
   background-color: transparent;
   font-size: 20px;
   line-height: 1.2;
+  grid-area: add-clothes;
 }
 
 .header__add-clothes-button:hover {
@@ -32,14 +35,67 @@
   cursor: pointer;
 }
 
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  grid-area: user;
+}
+
 .header__username {
-  margin-right: 12px;
   font-size: 20px;
   line-height: 1.2;
+  margin: 0;
 }
 
 .header__avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+}
+
+@media screen and (max-width: 800px) {
+  .header {
+    display: grid;
+    grid-template-areas: 'logo user' 'time-and-place add-clothes';
+    align-items: flex-end;
+    row-gap: 12px;
+  }
+
+  .header__add-clothes-button {
+    margin: 0 0 0 auto;
+    align-self: flex-start;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .header {
+    grid-template-areas: 'logo add-clothes user' 'time-and-place time-and-place time-and-place';
+    grid-template-columns: 1fr 40px 40px;
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  .header__user {
+    justify-self: flex-end;
+  }
+
+  .header__username {
+    display: none;
+  }
+
+  .header__button-text {
+    display: none;
+  }
+
+  .header__add-clothes-button::after {
+    content: '';
+    background-image: url('../../images/plus.jpg');
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
 }

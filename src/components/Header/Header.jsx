@@ -14,21 +14,28 @@ function Header({ openAddModal, location }) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="WTWR logo" />
-      <p className="header__time-and-place">
-        <time className="header__time" dateTime={date}>
-          {date}
-        </time>
-        , {location.city}
-      </p>
+
+      <div className="header__time-and-place">
+        <span className="header__time">
+          <time className="header__time" dateTime={date}>
+            {`${date}, `}
+          </time>
+        </span>
+        <span className="header__place">{location.city}</span>
+      </div>
+
       <button
         className="header__add-clothes-button"
         type="button"
         onClick={openAddModal}
       >
-        + Add Clothes
+        <span className="header__button-text">+ Add Clothes</span>
       </button>
-      <p className="header__username">Kevin Loughead</p>
-      <img className="header__avatar" src={avatar} alt="User's avatar" />
+
+      <div className="header__user">
+        <p className="header__username">Kevin Loughead</p>
+        <img className="header__avatar" src={avatar} alt="User's avatar" />
+      </div>
     </header>
   );
 }
