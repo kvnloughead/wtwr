@@ -70,8 +70,8 @@
 
 @media screen and (max-width: 550px) {
   .header {
-    grid-template-areas: 'logo add-clothes user' 'time-and-place time-and-place time-and-place';
-    grid-template-columns: 1fr 40px 40px;
+    grid-template-areas: 'logo user' 'time-and-place add-clothes';
+    grid-template-columns: 1fr 40px;
     column-gap: 20px;
     row-gap: 20px;
   }
