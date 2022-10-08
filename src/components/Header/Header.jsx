@@ -3,6 +3,7 @@ import { func, number, shape, string } from 'prop-types';
 
 import logo from '../../images/logo.svg';
 import avatar from '../../images/placeholder.png';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import './Header.css';
 
 function Header({ openAddModal, location }) {
@@ -14,7 +15,6 @@ function Header({ openAddModal, location }) {
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="WTWR logo" />
-
       <div className="header__time-and-place">
         <span className="header__time">
           <time className="header__time" dateTime={date}>
@@ -23,19 +23,21 @@ function Header({ openAddModal, location }) {
         </span>
         <span className="header__place">{location.city}</span>
       </div>
+      <nav className="header__nav">
+        <ToggleSwitch />
+        <button
+          className="header__add-clothes-button"
+          type="button"
+          onClick={openAddModal}
+        >
+          <span className="header__button-text">+ Add Clothes</span>
+        </button>
 
-      <button
-        className="header__add-clothes-button"
-        type="button"
-        onClick={openAddModal}
-      >
-        <span className="header__button-text">+ Add Clothes</span>
-      </button>
-
-      <div className="header__user">
-        <p className="header__username">Kevin Loughead</p>
-        <img className="header__avatar" src={avatar} alt="User's avatar" />
-      </div>
+        <div className="header__user">
+          <p className="header__username">Kevin Loughead</p>
+          <img className="header__avatar" src={avatar} alt="User's avatar" />
+        </div>
+      </nav>
     </header>
   );
 }
