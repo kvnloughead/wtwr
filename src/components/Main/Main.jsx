@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { shape, func, number } from 'prop-types';
 
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
 import { getTempDescriptor } from '../../utils/weatherApi';
 import './Main.css';
+
+import TempUnitContext from '../../contexts/TempUnitContext';
 
 const defaultClothingItems = [
   {
@@ -46,11 +48,13 @@ const defaultClothingItems = [
 ];
 
 function Main({ openItemModal, weather }) {
+  const { tempUnit } = useContext(TempUnitContext);
+
   return (
     <main className="main">
       <WeatherCard weather={weather} />
       <h2 className="main__text">
-        {`Today is ${weather.tempF}° F / You may want to wear:`}
+        {`Today is ${weather.temp[tempUnit]} / You may want to wear:`}
       </h2>
       <ul className="main__cards">
         {defaultClothingItems
