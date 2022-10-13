@@ -12,16 +12,27 @@ function ToggleSwitch() {
   }, [tempUnit]);
 
   return (
-    <label className="react-switch-label" htmlFor="react-switch-new">
-      <input
-        className="react-switch-checkbox"
-        id="react-switch-new"
-        type="checkbox"
-        checked={isChecked}
-        onChange={toggleTempUnit}
-      />
-      <span className="react-switch-button" />
-    </label>
+    <div className="toggle-switch">
+      <label
+        className={`toggle-switch__label ${
+          isChecked ? 'toggle-switch__label_checked' : ''
+        }`}
+        htmlFor="temp-unit-toggle-switch"
+      >
+        <input
+          className="toggle-switch__checkbox"
+          id="temp-unit-toggle-switch"
+          type="checkbox"
+          checked={isChecked}
+          onChange={toggleTempUnit}
+        />
+        <span
+          className={`toggle-switch__button ${
+            isChecked ? 'toggle-switch__button_checked' : ''
+          }`}
+        />
+      </label>
+    </div>
   );
 }
 
