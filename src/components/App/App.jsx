@@ -56,8 +56,8 @@ function App() {
       .then((data) => {
         setWeather({
           temp: {
-            F: `${data.current.temp_f} °F`,
-            C: `${data.current.temp_c} °C`,
+            F: Math.round(data.main.temp),
+            C: Math.round(((data.main.temp - 32) * 5) / 9),
           },
         });
         setLocation({ ...location, city: data.location.name });

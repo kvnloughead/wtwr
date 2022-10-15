@@ -9,7 +9,9 @@ function WeatherCard({ weather }) {
 
   return (
     <div className="weather-card">
-      <h2 className="weather-card__temp">{weather.temp[tempUnit]}</h2>
+      <h2 className="weather-card__temp">
+        {weather.temp[tempUnit]} °{tempUnit}
+      </h2>
     </div>
   );
 }

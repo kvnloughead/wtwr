@@ -1,9 +1,9 @@
 const getWeather = ({ latitude, longitude }, key) =>
   fetch(
-    `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${latitude},${longitude}&days=1`
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${key}`
   ).then((res) => res.json());
 
-const getTempDescriptor = (tempF) =>
-  tempF > 80 ? 'hot' : tempF > 60 ? 'warm' : 'cold';
+const getTempDescriptor = (temp) =>
+  temp > 80 ? 'hot' : temp > 60 ? 'warm' : 'cold';
 
 export { getWeather, getTempDescriptor };

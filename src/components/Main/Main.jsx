@@ -54,11 +54,11 @@ function Main({ openItemModal, weather }) {
     <main className="main">
       <WeatherCard weather={weather} />
       <h2 className="main__text">
-        {`Today is ${weather.temp[tempUnit]} / You may want to wear:`}
+        {`Today is ${weather.temp[tempUnit]} °${tempUnit} / You may want to wear:`}
       </h2>
       <ul className="main__cards">
         {defaultClothingItems
-          .filter((item) => item.weather === getTempDescriptor(weather.tempF))
+          .filter((item) => item.weather === getTempDescriptor(weather.temp.F))
           .map((item) => (
             <ItemCard
               key={item._id}
