@@ -26,13 +26,11 @@ function Header({ openAddModal, location }) {
       <nav className="header__nav">
         <ToggleSwitch />
         <button
-          className="header__add-clothes-button"
+          className="add-clothes-btn"
+          aria-label="add-clothes"
           type="button"
           onClick={openAddModal}
-        >
-          <span className="header__button-text">+ Add Clothes</span>
-        </button>
-
+        />
         <div className="user">
           <p className="name">Kevin Loughead</p>
           <img className="avatar" src={avatar} alt="User's avatar" />

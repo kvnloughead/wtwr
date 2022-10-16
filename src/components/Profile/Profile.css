@@ -19,8 +19,13 @@
   font-family: 'CabinetGrotesk-Bold';
   font-size: 20px;
   line-height: 1.2;
-  font-weight: 700;
   margin: 0 20px 0 0;
+  display: inline-block;
+}
+
+.profile .add-clothes-btn::before {
+  color: #00000099;
+  content: '+ Add new';
 }
 
 @media screen and (max-width: 650px) {

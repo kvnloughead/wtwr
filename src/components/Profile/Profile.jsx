@@ -1,8 +1,10 @@
 import React from 'react';
+import { func } from 'prop-types';
+
 import './Profile.css';
 import avatar from '../../images/placeholder.png';
 
-function Profile() {
+function Profile({ openAddModal }) {
   return (
     <div className="profile">
       <aside>
@@ -13,7 +15,12 @@ function Profile() {
       </aside>
       <div className="items">
         <h2>Your items</h2>
-        <button type="button">+ Add new</button>
+        <button
+          className="add-clothes-btn"
+          aria-label="add-clothes"
+          type="button"
+          onClick={openAddModal}
+        />
         <ul>
           <li>foo</li>
           <li>bar</li>
@@ -24,4 +31,7 @@ function Profile() {
   );
 }
 
+Profile.propTypes = {
+  openAddModal: func.isRequired,
+};
 export default Profile;

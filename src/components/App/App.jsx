@@ -27,7 +27,12 @@ function App() {
   const [location, setLocation] = useState({ ...coords, city: '' });
   const [tempUnit, setTempUnit] = useState('F');
 
-  const openAddModal = () => setActiveModal('add');
+  const openAddModal = () => {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    setActiveModal('add');
+  };
+
   const openItemModal = (card) => {
     setSelectedCard(card);
     setActiveModal('preview');
@@ -81,7 +86,11 @@ function App() {
                   <Main openItemModal={openItemModal} weather={weather} />
                 }
               />
-              <Route path="/profile" element={<Profile />} weather={weather} />
+              <Route
+                path="/profile"
+                element={<Profile openAddModal={openAddModal} />}
+                weather={weather}
+              />
             </Routes>
           </BrowserRouter>
           <Footer />

@@ -100,7 +100,8 @@
   color: #fff;
   border: none;
   width: fit-content;
-  font-family: 'CabinetGrotesk-Medium';
+  font-family: 'CabinetGrotesk-Medium', Arial, Helvetica, sans-serif;
+  font-weight: 500;
 }
 
 .modal__submit-button:hover {
