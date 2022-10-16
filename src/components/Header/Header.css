@@ -39,12 +39,11 @@
   color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
-
+/* 
 .header__user {
   display: flex;
   align-items: center;
   gap: 12px;
-  grid-area: user;
 }
 
 .header__username {
@@ -57,13 +56,12 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
+} */
 
 @media screen and (max-width: 900px) {
   .header {
     display: grid;
     grid-template-areas: 'logo nav' 'time-and-place time-and-place ';
-    align-items: flex-start;
     justify-content: space-between;
     row-gap: 12px;
   }

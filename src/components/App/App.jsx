@@ -1,7 +1,10 @@
 import React, { useState, useMemo } from 'react';
+import { Routes, Route } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
+import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import FormContents from '../FormContents/FormContents';
@@ -70,7 +73,17 @@ function App() {
       <div className="page__wrapper">
         <TempUnitContext.Provider value={tempUnitContextValue}>
           <Header openAddModal={openAddModal} location={location} />
-          <Main openItemModal={openItemModal} weather={weather} />
+          <BrowserRouter>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main openItemModal={openItemModal} weather={weather} />
+                }
+              />
+              <Route path="/profile" element={<Profile />} weather={weather} />
+            </Routes>
+          </BrowserRouter>
           <Footer />
           <ModalWithForm
             activeModal={activeModal}

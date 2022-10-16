@@ -1,0 +1,14 @@
+.profile {
+  padding-top: 58px;
+  display: flex;
+}
+
+.profile .avatar {
+  order: -1;
+  width: 56px;
+  height: 56px;
+}
+
+.profile aside {
+  flex-basis: 346px;
+}
