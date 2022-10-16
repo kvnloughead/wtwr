@@ -4,6 +4,10 @@
   height: 28px;
   width: 56px;
   position: relative;
+  grid-area: switch;
+  grid-column: 1 / 2;
+  grid-row: 1;
+  z-index: 1;
 }
 
 .switch input {

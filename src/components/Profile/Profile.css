@@ -1,0 +1,31 @@
+.profile {
+  padding-top: 58px;
+  display: flex;
+}
+
+.profile .avatar {
+  order: -1;
+  width: 56px;
+  height: 56px;
+}
+
+.profile aside {
+  flex-basis: 25%;
+  min-width: 250px;
+  max-width: 346px;
+}
+
+.profile h2 {
+  font-family: 'CabinetGrotesk-Bold';
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 20px 0 0;
+}
+
+@media screen and (max-width: 650px) {
+  .profile .user {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

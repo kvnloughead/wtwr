@@ -33,9 +33,9 @@ function Header({ openAddModal, location }) {
           <span className="header__button-text">+ Add Clothes</span>
         </button>
 
-        <div className="header__user">
-          <p className="header__username">Kevin Loughead</p>
-          <img className="header__avatar" src={avatar} alt="User's avatar" />
+        <div className="user">
+          <p className="name">Kevin Loughead</p>
+          <img className="avatar" src={avatar} alt="User's avatar" />
         </div>
       </nav>
     </header>
