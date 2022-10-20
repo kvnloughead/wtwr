@@ -21,5 +21,12 @@ module.exports = {
     'no-underscore-dangle': 0,
     'no-nested-ternary': 'off',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'jsx-a11y/no-redundant-roles': [
+      'error',
+      {
+        ul: ['list'], // allow  explicit role for lists, due to safari accessibility concerns
+        ol: ['list'],
+      },
+    ],
   },
 };
