@@ -66,7 +66,7 @@ function App() {
             C: Math.round(((data.main.temp - 32) * 5) / 9),
           },
         });
-        setLocation({ ...location, city: data.location.name });
+        setLocation({ ...location, city: data.name });
       })
       .catch((err) => console.error(err));
   }, []);

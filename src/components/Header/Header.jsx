@@ -8,15 +8,15 @@ import './Header.css';
 
 function Header({ openAddModal, location }) {
   const date = new Date().toLocaleString('default', {
-    month: 'long',
+    month: 'short',
     day: 'numeric',
   });
 
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="WTWR logo" />
-      <div className="header__time-and-place">
-        <span className="header__time">
+      <div className="header__time-and-place ellipsis">
+        <span>
           <time className="header__time" dateTime={date}>
             {`${date}, `}
           </time>
@@ -32,7 +32,7 @@ function Header({ openAddModal, location }) {
           onClick={openAddModal}
         />
         <div className="user">
-          <p className="name">Kevin Loughead</p>
+          <p className="name ellipsis">Kevin James Loughead</p>
           <img className="avatar" src={avatar} alt="User's avatar" />
         </div>
       </nav>

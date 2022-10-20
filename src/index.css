@@ -1,5 +1,6 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts/fonts.css');
+@import url('./css/mixins.css');
 @import url('./css/user.css');
 @import url('./css/button.css');
 @import url('./css/cards.css');
