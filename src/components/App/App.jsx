@@ -28,8 +28,6 @@ function App() {
   const [tempUnit, setTempUnit] = useState('F');
 
   const openAddModal = () => {
-    // eslint-disable-next-line no-debugger
-    debugger;
     setActiveModal('add');
   };
 
@@ -88,7 +86,12 @@ function App() {
               />
               <Route
                 path="/profile"
-                element={<Profile openAddModal={openAddModal} />}
+                element={
+                  <Profile
+                    openAddModal={openAddModal}
+                    openItemModal={openItemModal}
+                  />
+                }
                 weather={weather}
               />
             </Routes>

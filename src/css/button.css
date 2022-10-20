@@ -18,20 +18,3 @@
   color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
-
-@media screen and (max-width: 650px) {
-  .add-clothes-btn::before {
-    content: '';
-    background-image: url('../images/plus.svg');
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 20px;
-    height: 20px;
-    display: block;
-  }
-
-  .add-clothes-btn:hover::before {
-    height: 22px;
-  }
-}

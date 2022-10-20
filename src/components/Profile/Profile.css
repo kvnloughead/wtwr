@@ -18,7 +18,7 @@
 .profile h2 {
   font-family: 'CabinetGrotesk-Bold';
   font-size: 20px;
-  line-height: 1.2;
+  line-height: 2;
   margin: 0 20px 0 0;
   display: inline-block;
 }
@@ -28,9 +28,42 @@
   content: '+ Add new';
 }
 
+.profile .cards {
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+.profile .card {
+  width: 300px;
+  height: 300px;
+}
+
+.profile .container {
+  max-width: 932px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 1000px) {
+  .profile aside {
+    display: none;
+  }
+
+  .profile .cards {
+    justify-content: center;
+  }
+}
+
 @media screen and (max-width: 650px) {
   .profile .user {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .profile .card {
+    width: 100%;
   }
 }
