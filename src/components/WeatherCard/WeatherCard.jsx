@@ -1,4 +1,4 @@
-import { shape, string } from 'prop-types';
+import { shape, number } from 'prop-types';
 import React, { useContext } from 'react';
 import './WeatherCard.css';
 
@@ -17,7 +17,7 @@ function WeatherCard({ weather }) {
 }
 
 WeatherCard.propTypes = {
-  weather: shape({ temp: shape({ F: string, C: string }) }).isRequired,
+  weather: shape({ temp: shape({ F: number, C: number }) }).isRequired,
 };
 
 export default WeatherCard;

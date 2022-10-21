@@ -35,7 +35,7 @@ function Main({ openItemModal, weather }) {
 
 Main.propTypes = {
   openItemModal: func.isRequired,
-  weather: shape({ tempF: number }).isRequired,
+  weather: shape({ temp: shape({ F: number, C: number }) }).isRequired,
 };
 
 export default Main;
