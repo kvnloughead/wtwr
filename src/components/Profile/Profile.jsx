@@ -3,7 +3,8 @@ import { func } from 'prop-types';
 
 import ItemCard from '../ItemCard/ItemCard';
 import './Profile.css';
-import avatar from '../../images/placeholder.png';
+import avatar from '../../images/avatar.png';
+import { user } from '../../utils/constants';
 import defaultClothingItems from '../../utils/clothing';
 
 function Profile({ openAddModal, openItemModal }) {
@@ -11,7 +12,7 @@ function Profile({ openAddModal, openItemModal }) {
     <div className="profile">
       <aside>
         <div className="user">
-          <p className="name">Kevin Loughead</p>
+          <p className="name">{user.name}</p>
           <img className="avatar" src={avatar} alt="User's avatar" />
         </div>
       </aside>

@@ -2,7 +2,7 @@ import React from 'react';
 import { func, number, shape, string } from 'prop-types';
 
 import logo from '../../images/logo.svg';
-import avatar from '../../images/placeholder.png';
+import avatar from '../../images/avatar.png';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import './Header.css';
 
