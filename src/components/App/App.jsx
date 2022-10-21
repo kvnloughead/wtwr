@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from 'react';
 import { Routes, Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -76,27 +75,24 @@ function App() {
       <div className="page__wrapper">
         <TempUnitContext.Provider value={tempUnitContextValue}>
           <Header openAddModal={openAddModal} location={location} />
-          <BrowserRouter>
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Main openItemModal={openItemModal} weather={weather} />
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <Profile
-                    openAddModal={openAddModal}
-                    openItemModal={openItemModal}
-                  />
-                }
-                weather={weather}
-              />
-            </Routes>
-          </BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<Main openItemModal={openItemModal} weather={weather} />}
+            />
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  openAddModal={openAddModal}
+                  openItemModal={openItemModal}
+                />
+              }
+              weather={weather}
+            />
+          </Routes>
           <Footer />
+
           <ModalWithForm
             activeModal={activeModal}
             title="New garment"
