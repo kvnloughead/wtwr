@@ -64,6 +64,9 @@ function App() {
             F: Math.round(data.main.temp),
             C: Math.round(((data.main.temp - 32) * 5) / 9),
           },
+          sunrise: data.sys.sunrise,
+          sunset: data.sys.sunset,
+          id: data.weather[0].id,
         });
         setLocation({ ...location, city: data.name });
       })

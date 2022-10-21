@@ -3,10 +3,10 @@ import React, { useContext } from 'react';
 import './WeatherCard.css';
 
 import TempUnitContext from '../../contexts/TempUnitContext';
+import { isDay, getCondition } from '../../utils/weatherApi';
 
 function WeatherCard({ weather }) {
   const { tempUnit } = useContext(TempUnitContext);
-  const time = 'day';
 
   return (
     <div className="weather-card">
@@ -14,7 +14,9 @@ function WeatherCard({ weather }) {
         {weather.temp[tempUnit]} °{tempUnit}
       </h2>
       <img
-        src={`/images/weather/${time}/foggy.png`}
+        src={`/images/weather/${
+          isDay(weather) ? 'day' : 'night'
+        }/${getCondition(weather)}.png`}
         alt="Card indicating foggy daytime weather."
       />
     </div>

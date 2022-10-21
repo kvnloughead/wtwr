@@ -16,9 +16,12 @@
 }
 
 .weather-card img {
-  max-width: 100%;
   min-height: 80px;
   position: absolute;
   top: 0;
   right: 0;
+  object-fit: cover;
+  max-width: 100%;
+  object-position: 100% 0;
+  border-radius: 10px;
 }
