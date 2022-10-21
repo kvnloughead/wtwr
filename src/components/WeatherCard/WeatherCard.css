@@ -1,17 +1,24 @@
 .weather-card {
-  background-color: #00a3ff;
   min-height: 80px;
   border-radius: 12px;
   padding: 20px 16px;
   box-sizing: border-box;
-  background-repeat: no-repeat;
-  background-position: bottom right, top right;
-  background-image: url(../../images/clouds.svg), url(../../images/sun.svg);
+  position: relative;
 }
 
-.weather-card__temp {
+.weather-card .temp {
   font-size: 36px;
   line-height: 1.11;
   margin: 0;
   color: white;
+  position: relative;
+  z-index: 1;
+}
+
+.weather-card img {
+  max-width: 100%;
+  min-height: 80px;
+  position: absolute;
+  top: 0;
+  right: 0;
 }

@@ -6,12 +6,17 @@ import TempUnitContext from '../../contexts/TempUnitContext';
 
 function WeatherCard({ weather }) {
   const { tempUnit } = useContext(TempUnitContext);
+  const time = 'day';
 
   return (
     <div className="weather-card">
-      <h2 className="weather-card__temp">
+      <h2 className="temp">
         {weather.temp[tempUnit]} °{tempUnit}
       </h2>
+      <img
+        src={`/images/weather/${time}/foggy.png`}
+        alt="Card indicating foggy daytime weather."
+      />
     </div>
   );
 }
