@@ -52,8 +52,15 @@
   display: block;
   border: none;
   border-bottom: 1px solid #000;
-  margin-bottom: 24px;
   width: 100%;
+}
+
+.modal__input-error {
+  display: block;
+  padding: 6px 0 15px;
+  height: 12px;
+  font-size: 12px;
+  color: #cc0000;
 }
 
 .modal__input::placeholder {
@@ -96,17 +103,21 @@
 .modal__submit-button {
   padding: 8px 16px;
   border-radius: 4px;
-  background-color: #0000004d;
   color: #fff;
   border: none;
   width: fit-content;
   font-family: 'CabinetGrotesk-Medium', Arial, Helvetica, sans-serif;
   font-weight: 500;
+  background: rgba(0, 0, 0, 0.6);
+  cursor: pointer;
 }
 
 .modal__submit-button:hover {
-  background: rgba(0, 0, 0, 0.6);
-  cursor: pointer;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal__submit-button:disabled {
+  background-color: #0000004d;
 }
 
 .modal__container_type_preview {

@@ -2,11 +2,11 @@ import { shape, number } from 'prop-types';
 import React, { useContext } from 'react';
 import './WeatherCard.css';
 
-import TempUnitContext from '../../contexts/TempUnitContext';
+import AppContext from '../../contexts/AppContext';
 import { isDay, getCondition } from '../../utils/weatherApi';
 
 function WeatherCard({ weather }) {
-  const { tempUnit } = useContext(TempUnitContext);
+  const { tempUnit } = useContext(AppContext);
 
   return (
     <div className="weather-card">

@@ -1,10 +1,10 @@
 import React, { useEffect, useContext, useState } from 'react';
 
-import TempUnitContext from '../../contexts/TempUnitContext';
+import AppContext from '../../contexts/AppContext';
 import './ToggleSwitch.css';
 
 function ToggleSwitch() {
-  const { tempUnit, toggleTempUnit } = useContext(TempUnitContext);
+  const { tempUnit, toggleTempUnit } = useContext(AppContext);
   const [checked, setChecked] = useState(tempUnit === 'C');
 
   useEffect(() => {

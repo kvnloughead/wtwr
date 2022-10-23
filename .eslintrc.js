@@ -29,7 +29,7 @@ module.exports = {
     'jsx-a11y/no-redundant-roles': [
       'error',
       {
-        ul: ['list'], // allow  explicit role for lists, due to safari accessibility concerns
+        ul: ['list'],
         ol: ['list'],
       },
     ],

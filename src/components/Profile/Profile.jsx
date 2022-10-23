@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { func } from 'prop-types';
 
 import ItemCard from '../ItemCard/ItemCard';
 import './Profile.css';
 import avatar from '../../images/avatar.png';
 import { user } from '../../utils/constants';
-import defaultClothingItems from '../../utils/clothing';
+
+import AppContext from '../../contexts/AppContext';
 
 function Profile({ openAddModal, openItemModal }) {
+  const { clothing } = useContext(AppContext);
+
   return (
     <div className="profile">
       <aside>
@@ -28,7 +31,7 @@ function Profile({ openAddModal, openItemModal }) {
         </div>
 
         <ul role="list" className="cards">
-          {defaultClothingItems.map((item) => (
+          {clothing.map((item) => (
             <ItemCard
               key={item._id}
               data={item}

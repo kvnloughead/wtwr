@@ -5,18 +5,19 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
-import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import FormContents from '../FormContents/FormContents';
 import ItemModal from '../ItemModal/ItemModal';
+import AddItemModal from '../AddItemModal/AddItemModal';
+import defaultClothingItems from '../../utils/clothing';
 import './App.css';
 
 import { coords, apiKey } from '../../utils/constants';
 import { getWeather } from '../../utils/weatherApi';
-import TempUnitContext from '../../contexts/TempUnitContext';
+import AppContext from '../../contexts/AppContext';
 
 function App() {
   const [activeModal, setActiveModal] = useState('');
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
+  const [clothing, setClothing] = useState(defaultClothingItems);
   const [selectedCard, setSelectedCard] = useState({
     _id: -1,
     name: '',
@@ -51,10 +52,14 @@ function App() {
     setTempUnit(tempUnit === 'F' ? 'C' : 'F');
   };
 
-  const tempUnitContextValue = useMemo(
-    () => ({ tempUnit, toggleTempUnit }),
-    [tempUnit]
+  const AppContextValue = useMemo(
+    () => ({ clothing, tempUnit, toggleTempUnit }),
+    [clothing, tempUnit]
   );
+
+  const handleAddItemSubmit = (values) => {
+    setClothing([{ ...values, _id: clothing.length }, ...clothing]);
+  };
 
   React.useEffect(() => {
     getWeather(location, apiKey)
@@ -76,8 +81,9 @@ function App() {
   return (
     <div className="page">
       <div className="page__wrapper">
-        <TempUnitContext.Provider value={tempUnitContextValue}>
+        <AppContext.Provider value={AppContextValue}>
           <Header openAddModal={openAddModal} location={location} />
+
           <Routes>
             <Route
               path="/"
@@ -89,27 +95,28 @@ function App() {
                 <Profile
                   openAddModal={openAddModal}
                   openItemModal={openItemModal}
+                  clothing={clothing}
                 />
               }
               weather={weather}
             />
           </Routes>
-          <Footer />
 
-          <ModalWithForm
+          <Footer />
+          <AddItemModal
             activeModal={activeModal}
             title="New garment"
             openAddModal={openAddModal}
             closeModal={closeModal}
-          >
-            <FormContents />
-          </ModalWithForm>
+            handleAddItemSubmit={handleAddItemSubmit}
+          />
+
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
             closeModal={closeModal}
           />
-        </TempUnitContext.Provider>
+        </AppContext.Provider>
       </div>
     </div>
   );

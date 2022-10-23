@@ -6,11 +6,10 @@ import ItemCard from '../ItemCard/ItemCard';
 import { getTempDescriptor } from '../../utils/weatherApi';
 import './Main.css';
 
-import TempUnitContext from '../../contexts/TempUnitContext';
-import defaultClothingItems from '../../utils/clothing';
+import AppContext from '../../contexts/AppContext';
 
 function Main({ openItemModal, weather }) {
-  const { tempUnit } = useContext(TempUnitContext);
+  const { tempUnit, clothing } = useContext(AppContext);
 
   return (
     <main className="main">
@@ -19,7 +18,7 @@ function Main({ openItemModal, weather }) {
         {`Today is ${weather.temp[tempUnit]} °${tempUnit} / You may want to wear:`}
       </h2>
       <ul role="list" className="cards">
-        {defaultClothingItems
+        {clothing
           .filter((item) => item.weather === getTempDescriptor(weather.temp.F))
           .map((item) => (
             <ItemCard

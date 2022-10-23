@@ -1,10 +1,17 @@
-import { func, string, oneOfType, arrayOf, node } from 'prop-types';
+import { func, string, oneOfType, arrayOf, node, bool } from 'prop-types';
 import React from 'react';
 
 import useEscape from '../../hooks/useEscape';
 import './ModalWithForm.css';
 
-function ModalWithForm({ activeModal, closeModal, title, children }) {
+function ModalWithForm({
+  activeModal,
+  closeModal,
+  handleSubmit,
+  isValid,
+  title,
+  children,
+}) {
   useEscape(closeModal);
 
   return (
@@ -21,9 +28,17 @@ function ModalWithForm({ activeModal, closeModal, title, children }) {
           className="modal__close-button"
           onClick={closeModal}
         />
-        <form className="modal__form" name={activeModal} action="" method="get">
+        <form
+          className="modal__form"
+          name={activeModal}
+          onSubmit={handleSubmit}
+        >
           {children}
-          <button className="modal__submit-button" type="submit">
+          <button
+            className="modal__submit-button"
+            type="submit"
+            disabled={!isValid}
+          >
             Add Garment
           </button>
         </form>
@@ -35,7 +50,9 @@ function ModalWithForm({ activeModal, closeModal, title, children }) {
 ModalWithForm.propTypes = {
   activeModal: string.isRequired,
   closeModal: func.isRequired,
+  handleSubmit: func.isRequired,
   title: string.isRequired,
+  isValid: bool.isRequired,
   children: oneOfType([arrayOf(node), node]).isRequired,
 };
 
