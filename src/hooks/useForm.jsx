@@ -4,7 +4,6 @@ function useForm() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isValid, setIsValid] = useState(false);
-  const [setSubmitError] = useState('');
 
   const handleChange = (event) => {
     const { target } = event;
@@ -19,7 +18,6 @@ function useForm() {
     setValues({});
     setErrors({});
     setIsValid(false);
-    setSubmitError('');
   }, [setValues, setErrors, setIsValid]);
 
   return { values, errors, isValid, setIsValid, handleChange, resetForm };

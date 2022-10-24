@@ -44,29 +44,6 @@
   flex-direction: column;
 }
 
-.modal__input-label {
-}
-
-.modal__input {
-  padding: 8px 0 4px;
-  display: block;
-  border: none;
-  border-bottom: 1px solid #000;
-  width: 100%;
-}
-
-.modal__input-error {
-  display: block;
-  padding: 6px 0 15px;
-  height: 12px;
-  font-size: 12px;
-  color: #cc0000;
-}
-
-.modal__input::placeholder {
-  color: #00000080;
-}
-
 .modal__fieldset {
   border: none;
   padding: 0;
@@ -78,10 +55,6 @@
 
 .modal__legend {
   margin-bottom: 12px;
-}
-
-.modal__radio-input {
-  margin-right: 11px;
 }
 
 .modal__close-button {
