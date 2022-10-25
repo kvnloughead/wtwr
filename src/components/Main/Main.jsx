@@ -3,7 +3,7 @@ import { shape, func, number } from 'prop-types';
 
 import WeatherCard from '../WeatherCard/WeatherCard';
 import ItemCard from '../ItemCard/ItemCard';
-import { getTempDescriptor } from '../../utils/weatherApi';
+import { getTempDescriptor } from '../../utils/helpers';
 import './Main.css';
 
 import AppContext from '../../contexts/AppContext';

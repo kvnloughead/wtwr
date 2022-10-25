@@ -11,7 +11,7 @@ import defaultClothingItems from '../../utils/clothing';
 import './App.css';
 
 import { coords, apiKey } from '../../utils/constants';
-import { getWeather } from '../../utils/weatherApi';
+import getWeather from '../../utils/weatherApi';
 import AppContext from '../../contexts/AppContext';
 
 function App() {

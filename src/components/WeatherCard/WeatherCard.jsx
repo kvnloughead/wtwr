@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import './WeatherCard.css';
 
 import AppContext from '../../contexts/AppContext';
-import { isDay, getCondition } from '../../utils/weatherApi';
+import { isDay, getCondition } from '../../utils/helpers';
 
 function WeatherCard({ weather }) {
   const { tempUnit } = useContext(AppContext);
@@ -15,7 +15,7 @@ function WeatherCard({ weather }) {
       </h2>
       <img
         src={`/images/weather/${
-          isDay(weather) ? 'day' : 'night'
+          isDay(weather, Date.now()) ? 'day' : 'night'
         }/${getCondition(weather)}.png`}
         alt="Card indicating foggy daytime weather."
       />
