@@ -1,0 +1,29 @@
+{
+  "name": "wtwr-api",
+  "version": "0.0.1",
+  "description": "Backend for WTWR app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "npx eslint .",
+    "fix": "npx eslint . -- --fix"
+  },
+  "keywords": [
+    "express",
+    "mongodb"
+  ],
+  "author": "Kevin Loughead",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1"
+  }
+}
