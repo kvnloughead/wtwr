@@ -1,5 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const handleError = require("./middleware/error-handler");
+
+require("dotenv").config();
 
 const { PORT = 3001 } = process.env;
 const app = express();
@@ -16,6 +19,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/", require("./routes"));
+
+app.use(handleError);
 
 app.listen(PORT, () => {
   console.log(`App listening at port ${PORT}`);
