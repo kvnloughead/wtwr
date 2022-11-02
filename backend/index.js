@@ -13,8 +13,13 @@ mongoose.connect("mongodb://localhost:27017/wtwr_db");
 
 app.use((req, res, next) => {
   req.user = {
-    _id: "635b1d79e2bde2e21b6ef4cb",
+    _id: "635b1da3e2bde2e21b6ef4cf",
   };
+  next();
+});
+
+app.use((req, res, next) => {
+  res.setHeader("Content-Type", "application/json");
   next();
 });
 

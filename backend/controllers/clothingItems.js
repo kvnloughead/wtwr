@@ -9,7 +9,6 @@ const getItems = (req, res, next) => {
 
 const createItem = (req, res, next) => {
   ClothingItem.create({ ...req.body, owner: req.user._id })
-    .orFail()
     .then((item) => res.status(201).send(item))
     .catch(next);
 };
@@ -24,4 +23,20 @@ const deleteItem = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getItems, createItem, deleteItem };
+const setLike = (req, res, next) => {
+  const action =
+    req.method === "PUT"
+      ? { $addToSet: { likes: req.user._id } }
+      : { $pull: { likes: req.user._id } };
+  ClothingItem.findByIdAndUpdate(req.params.itemId, action, { new: true })
+    .orFail()
+    .then((item) => res.status(200).send(item))
+    .catch(next);
+};
+
+module.exports = {
+  getItems,
+  createItem,
+  deleteItem,
+  setLike,
+};
