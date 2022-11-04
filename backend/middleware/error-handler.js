@@ -1,7 +1,7 @@
-const ERRORS = require("../utils/errors");
+const { getCurrentError } = require("../utils/errors");
 
 const handleError = (err, req, res, next) => {
-  const CurrentError = ERRORS[err.name] || ERRORS.default;
+  const CurrentError = getCurrentError(err);
   res.status(CurrentError.statusCode).send({ message: CurrentError.message });
   next(err);
 };
