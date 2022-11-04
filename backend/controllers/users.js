@@ -7,8 +7,7 @@ const getUsers = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  const { name, avatar } = req.body;
-  User.create({ name, avatar })
+  User.create(req.body)
     .then((user) => res.status(201).send(user))
     .catch(next);
 };

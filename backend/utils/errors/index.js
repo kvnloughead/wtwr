@@ -3,10 +3,11 @@ const InternalServerError = require("./InternalServerError");
 const NotFoundError = require("./NotFoundError");
 
 const ERRORS = {
-  CastError: BadRequestError,
-  ValidationError: BadRequestError,
-  DocumentNotFoundError: NotFoundError,
-  default: InternalServerError,
+  CastError: new BadRequestError(),
+  ValidationError: new BadRequestError(),
+  MongoServerError: new BadRequestError("Email already in use"),
+  DocumentNotFoundError: new NotFoundError(),
+  default: new InternalServerError(),
 };
 
 module.exports = ERRORS;

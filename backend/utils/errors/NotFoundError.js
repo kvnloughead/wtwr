@@ -5,4 +5,4 @@ class NotFoundError extends Error {
   }
 }
 
-module.exports = new NotFoundError();
+module.exports = NotFoundError;

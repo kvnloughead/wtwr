@@ -5,4 +5,4 @@ class InternalServerError extends Error {
   }
 }
 
-module.exports = new InternalServerError();
+module.exports = InternalServerError;
