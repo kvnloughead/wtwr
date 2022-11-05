@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     "no-underscore-dangle": 0,
     "no-console": ["error", { allow: ["log", "warn", "error"] }],
+    "func-names": ["warning", "as-needed"],
   },
 };
