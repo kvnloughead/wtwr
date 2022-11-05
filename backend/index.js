@@ -5,6 +5,8 @@ const handleError = require("./middleware/error-handler");
 require("dotenv").config();
 
 const { PORT = 3001 } = process.env;
+const { createUser, login } = require("./controllers/users");
+
 const app = express();
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
@@ -22,6 +24,9 @@ app.use((req, res, next) => {
   res.setHeader("Content-Type", "application/json");
   next();
 });
+
+app.post("/signup", createUser);
+app.post("/signin", login);
 
 app.use("/", require("./routes"));
 

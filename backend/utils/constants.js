@@ -5,5 +5,6 @@ const DEFAULT_USER = {
 };
 
 const SALT = 10;
+const JWT_SECRET = "not-a-secret";
 
-module.exports = { DEFAULT_USER, SALT };
+module.exports = { DEFAULT_USER, SALT, JWT_SECRET };

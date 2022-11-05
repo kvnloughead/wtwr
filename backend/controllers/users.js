@@ -1,7 +1,8 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
-const { SALT } = require("../utils/constants");
+const { SALT, JWT_SECRET } = require("../utils/constants");
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -27,4 +28,17 @@ const getUser = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUsers, getUser, createUser };
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+  return User.findUserByCredentials(email, password)
+    .then((user) => {
+      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+        expiresIn: "7d",
+      });
+      res.header("authorization", `Bearer ${token}`);
+      res.status(200).send({ token });
+    })
+    .catch(next);
+};
+
+module.exports = { getUsers, getUser, createUser, login };

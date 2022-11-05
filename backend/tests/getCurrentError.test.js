@@ -16,7 +16,7 @@ const simpleErrors = [
 ];
 
 const mongoServerErrors = [
-  { code: 11000, status: 400, message: "Email already in use" },
+  { code: 11000, status: 409, message: "Email already in use" },
   { code: 10101, status: 500, message: "An error has occurred on the server." },
   {
     code: undefined,
