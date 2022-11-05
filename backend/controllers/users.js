@@ -1,4 +1,7 @@
+const bcrypt = require("bcrypt");
+
 const User = require("../models/user");
+const { SALT } = require("../utils/constants");
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -7,9 +10,11 @@ const getUsers = (req, res, next) => {
 };
 
 const createUser = (req, res, next) => {
-  User.create(req.body)
-    .then((user) => res.status(201).send(user))
-    .catch(next);
+  bcrypt.hash(req.body.password, SALT, (err, hash) => {
+    User.create({ ...req.body, password: hash })
+      .then((user) => res.status(201).send(user))
+      .catch(next);
+  });
 };
 
 const getUser = (req, res, next) => {
