@@ -1,11 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const handleError = require("./middleware/error-handler");
 
 require("dotenv").config();
 
 const { PORT = 3001 } = process.env;
 const { createUser, login } = require("./controllers/users");
+const handleError = require("./middleware/error-handler");
 
 const app = express();
 app.use(express.json({ extended: true }));
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 app.post("/signup", createUser);
 app.post("/signin", login);
 
-app.use("/", require("./routes"));
+app.use("/", require("./middleware/auth"), require("./routes"));
 
 app.use(handleError);
 

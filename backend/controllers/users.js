@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
-const { SALT, JWT_SECRET } = require("../utils/constants");
+const { SALT } = require("../utils/constants");
 
 const getUsers = (req, res, next) => {
   User.find({})
@@ -32,7 +32,7 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY || "dev", {
         expiresIn: "7d",
       });
       res.header("authorization", `Bearer ${token}`);

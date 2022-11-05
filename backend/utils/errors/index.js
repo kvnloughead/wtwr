@@ -9,6 +9,7 @@ const customErrors = [
   "ConflictError",
   "UnauthorizedError",
   "InternalServerError",
+  "ForbiddenError",
 ];
 
 const getCurrentError = (err) => {

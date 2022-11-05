@@ -1,5 +1,5 @@
 class UnauthorizedError extends Error {
-  constructor(message = "Authorization required") {
+  constructor(message = "Invalid credentials") {
     super(message);
     this.name = "UnauthorizedError";
     this.statusCode = 401;
