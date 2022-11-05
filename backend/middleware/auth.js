@@ -3,10 +3,9 @@ const ForbiddenError = require("../utils/errors/ForbiddenError");
 const UnauthorizedError = require("../utils/errors/UnauthorizedError");
 
 module.exports = (req, res, next) => {
-  const { authorization } = req.headers;
-  if (!authorization || !authorization.startsWith("Bearer "))
-    throw new UnauthorizedError();
-  const token = authorization.replace("Bearer ", "");
+  const { authorization: auth } = req.headers;
+  if (!auth || !auth.startsWith("Bearer ")) throw new UnauthorizedError();
+  const token = auth.replace("Bearer ", "");
   let payload;
   try {
     payload = jwt.verify(token, process.env.JWT_KEY || "dev");
