@@ -5,6 +5,7 @@ const createServer = require("../server");
 const User = require("../models/user");
 const ClothingItem = require("../models/clothingItem");
 const { DEFAULT_USER, TEST_USER } = require("../utils/constants");
+const { BAD_USERS } = require("./constants");
 
 beforeEach((done) => {
   mongoose.connect(
@@ -22,23 +23,6 @@ afterEach(async () => {
 const app = createServer();
 
 describe("create user", () => {
-  it("should create a user with default name", async () => {
-    const user = await User.create({
-      email: "test-user@testing.com",
-      password: "password",
-    });
-    const found = await User.findOne({ email: "test-user@testing.com" });
-    expect(found.name).toBe(DEFAULT_USER.name);
-    expect(found.avatar).toBe(DEFAULT_USER.avatar);
-  });
-
-  it("should create a user with valid parameters", async () => {
-    const user = await User.create(TEST_USER);
-    const found = await User.findOne({ email: "test-user@testing.com" });
-    expect(found.name).toBe(TEST_USER.name);
-    expect(found.avatar).toBe(TEST_USER.avatar);
-  });
-
   it("should create a user with valid email and password", async () => {
     await supertest(app)
       .post("/signup")
@@ -55,6 +39,33 @@ describe("create user", () => {
         });
         expect(response.body).toHaveProperty("password");
         expect(response.body).toHaveProperty("_id");
+      });
+  });
+
+  it("should return 400 if the data is invalid", async () => {
+    BAD_USERS.forEach(async (badUser) => {
+      await supertest(app)
+        .post("/signup")
+        .send(badUser)
+        .expect(400)
+        .then((response) => {
+          expect(response.body).toMatchObject({
+            message: "Invalid request",
+          });
+        });
+    });
+  });
+
+  it("should return 409 if the email is taken", async () => {
+    await User.create(TEST_USER);
+    await supertest(app)
+      .post("/signup")
+      .send(TEST_USER)
+      .expect(409)
+      .then((response) => {
+        expect(response.body).toMatchObject({
+          message: "Email already in use",
+        });
       });
   });
 });

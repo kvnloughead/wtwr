@@ -11,16 +11,13 @@ const TEST_USER_DEFAULTS = {
   password: "password",
 };
 
-const TEST_USER_INVALID_NAME = {
-  name: "1",
-  email: "testing@test.com",
-  password: "password",
-};
+const BAD_USERS = [
+  { email: TEST_USER.email },
+  { password: "asdfasdf" },
+  { ...TEST_USER, email: "foobar" },
+  { ...TEST_USER, email: "" },
+  { ...TEST_USER, name: "X" },
+  { ...TEST_USER, avatar: "bad-url" },
+];
 
-const TEST_USER_INVALID_AVATAR = {
-  avatar: "not-a-url",
-  email: "testing@test.com",
-  password: "password",
-};
-
-module.exports = { TEST_USER, TEST_USER_DEFAULTS };
+module.exports = { TEST_USER, TEST_USER_DEFAULTS, BAD_USERS };
