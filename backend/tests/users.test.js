@@ -5,7 +5,11 @@ const createServer = require("../server");
 const User = require("../models/user");
 const ClothingItem = require("../models/clothingItem");
 const { DEFAULT_USER, TEST_USER } = require("../utils/constants");
-const { BAD_USERS } = require("./constants");
+const {
+  INVALID_USERS,
+  INVALID_CREDENTIALS,
+  TEST_ITEM,
+} = require("./constants");
 
 beforeEach((done) => {
   mongoose.connect(
@@ -22,7 +26,7 @@ afterEach(async () => {
 
 const app = createServer();
 
-describe("create user", () => {
+describe("POST /signup", () => {
   it("should create a user with valid email and password", async () => {
     await supertest(app)
       .post("/signup")
@@ -43,7 +47,7 @@ describe("create user", () => {
   });
 
   it("should return 400 if the data is invalid", async () => {
-    BAD_USERS.forEach(async (badUser) => {
+    INVALID_USERS.forEach(async (badUser) => {
       await supertest(app)
         .post("/signup")
         .send(badUser)
@@ -57,7 +61,7 @@ describe("create user", () => {
   });
 
   it("should return 409 if the email is taken", async () => {
-    await User.create(TEST_USER);
+    await supertest(app).post("/signup").send(TEST_USER);
     await supertest(app)
       .post("/signup")
       .send(TEST_USER)
@@ -67,5 +71,51 @@ describe("create user", () => {
           message: "Email already in use",
         });
       });
+  });
+});
+
+describe("POST /signin", () => {
+  it("should log a user in with valid email and password", async () => {
+    await supertest(app).post("/signup").send(TEST_USER);
+    await supertest(app)
+      .post("/signin")
+      .send(TEST_USER)
+      .then((response) => {
+        expect(response.body).toHaveProperty("token");
+      });
+  });
+
+  it("should return 401 if credentials are invalid", async () => {
+    INVALID_CREDENTIALS.forEach(async (unauthorizedLogin) => {
+      await supertest(app)
+        .post("/signin")
+        .send(unauthorizedLogin)
+        .expect(401)
+        .then((response) => {
+          expect(response.body).toMatchObject({
+            message: "Incorrect email or password",
+          });
+        });
+    });
+  });
+
+  describe("POST /items", () => {
+    it("should allow item creation if the user is authorized", async () => {
+      const user = await supertest(app).post("/signup").send(TEST_USER);
+      const login = await supertest(app).post("/signin").send(TEST_USER);
+      const { _id } = user._body;
+      const { token } = login._body;
+      await supertest(app)
+        .post("/items")
+        .set("authorization", `Bearer ${token}`)
+        .send({ ...TEST_ITEM, owner: _id })
+        .expect(201)
+        .then((response) => {
+          expect(response.body).toMatchObject({ ...TEST_ITEM, owner: _id });
+          expect(response.body.likes.length).toBe(0);
+          expect(response.body).toHaveProperty("createdAt");
+          expect(response.body).toHaveProperty("_id");
+        });
+    });
   });
 });
