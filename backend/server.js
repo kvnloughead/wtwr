@@ -10,13 +10,6 @@ function createServer() {
   app.use(express.urlencoded({ extended: true }));
 
   app.use((req, res, next) => {
-    req.user = {
-      _id: "635b1da3e2bde2e21b6ef4cf",
-    };
-    next();
-  });
-
-  app.use((req, res, next) => {
     res.setHeader("Content-Type", "application/json");
     next();
   });
