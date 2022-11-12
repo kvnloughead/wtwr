@@ -1,4 +1,6 @@
 const express = require("express");
+require("express-async-errors");
+
 const { getItems } = require("./controllers/clothingItems");
 
 const { createUser, login } = require("./controllers/users");
