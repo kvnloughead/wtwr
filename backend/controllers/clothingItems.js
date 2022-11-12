@@ -13,14 +13,10 @@ const createItem = (req, res, next) => {
     .catch(next);
 };
 
-const deleteItem = (req, res, next) => {
-  ClothingItem.deleteOne({ _id: req.params.id })
-    .orFail()
-    .then((result) => {
-      if (result.deletedCount === 0) throw new NotFoundError();
-      res.status(200).send(result);
-    })
-    .catch(next);
+const deleteItem = async (req, res, next) => {
+  const result = await ClothingItem.deleteOne({ _id: req.params.id }).orFail();
+  if (result.deletedCount === 0) throw new NotFoundError();
+  res.status(200).send(result);
 };
 
 const setLike = (req, res, next) => {
