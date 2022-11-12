@@ -37,6 +37,18 @@ const getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+const updateUser = (req, res, next) => {
+  User.findOneAndUpdate({ _id: req.user._id }, req.body, {
+    new: true,
+    runValidators: true,
+  })
+    .orFail()
+    .then((user) => {
+      res.status(200).send(user);
+    })
+    .catch(next);
+};
+
 const login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
@@ -50,4 +62,11 @@ const login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports = { getUsers, getUser, createUser, login, getCurrentUser };
+module.exports = {
+  getUsers,
+  getUser,
+  createUser,
+  getCurrentUser,
+  updateUser,
+  login,
+};

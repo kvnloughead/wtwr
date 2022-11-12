@@ -8,9 +8,7 @@ const { DEFAULT_USER, TEST_USER } = require("../utils/constants");
 const {
   INVALID_CREDENTIALS,
   INVALID_USERS,
-  INVALID_TOKENS,
   TEST_ITEM,
-  BAD_TOKENS,
   UNAUTHORIZED_TOKENS,
   FORBIDDEN_TOKENS,
 } = require("./constants");
@@ -29,6 +27,19 @@ afterEach(async () => {
 });
 
 const app = createServer();
+
+/**
+ *
+ * @param data - user's signin credentials
+ * @param data.email - user's email
+ * @param data.password - user's password
+ * @returns object containing the user object and the token return by the API
+ */
+const loginUser = async (data) => {
+  const user = await supertest(app).post("/signup").send(data);
+  const login = await supertest(app).post("/signin").send(data);
+  return { user, token: login._body.token };
+};
 
 describe("POST /signup", () => {
   it("should create a user with valid email and password", async () => {
@@ -122,47 +133,79 @@ describe("POST /signin", () => {
         });
     });
   });
+});
 
-  describe("GET /users/me", () => {
-    it("should return current user's info if user is logged in", async () => {
-      const user = await supertest(app).post("/signup").send(TEST_USER);
-      const login = await supertest(app).post("/signin").send(TEST_USER);
-      const { token } = login._body;
+describe("GET /users/me", () => {
+  it("should return current user's info if user is logged in", async () => {
+    const { user, token } = await loginUser(TEST_USER);
+    await supertest(app)
+      .get("/users/me")
+      .set("authorization", `Bearer ${token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.email).toBe(TEST_USER.email);
+        expect(response.body.name).toBe(TEST_USER.name);
+        expect(response.body.avatar).toBe(TEST_USER.avatar);
+        expect(response.body._id).toBe(user._body._id);
+        expect(response.body).not.toHaveProperty("password");
+      });
+  });
+
+  it("should return 401 if credentials are malformed", async () => {
+    UNAUTHORIZED_TOKENS.forEach(async (token) => {
       await supertest(app)
         .get("/users/me")
-        .set("authorization", `Bearer ${token}`)
-        .expect(200)
+        .set("authorization", token)
+        .expect(401)
         .then((response) => {
-          expect(response.body.email).toBe(TEST_USER.email);
-          expect(response.body.name).toBe(TEST_USER.name);
-          expect(response.body.avatar).toBe(TEST_USER.avatar);
-          expect(response.body._id).toBe(user._body._id);
-          expect(response.body).not.toHaveProperty("password");
+          expect(response.body).toHaveProperty("message");
         });
     });
+  });
 
-    it("should return 401 if credentials are malformed", async () => {
-      UNAUTHORIZED_TOKENS.forEach(async (token) => {
+  it("should return 403 if credentials are invalid", async () => {
+    FORBIDDEN_TOKENS.forEach(async (token) => {
+      await supertest(app)
+        .get("/users/me")
+        .set("authorization", token)
+        .expect(403)
+        .then((response) => {
+          expect(response.body).toHaveProperty("message");
+        });
+    });
+  });
+});
+
+describe("PUT /users/me", () => {
+  it("should update if data is valid", async () => {
+    const { user, token } = await loginUser(TEST_USER);
+    await supertest(app)
+      .patch("/users/me")
+      .send({ name: "new name" })
+      .set("authorization", `Bearer ${token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.email).toBe(TEST_USER.email);
+        expect(response.body.avatar).toBe(TEST_USER.avatar);
+        expect(response.body._id).toBe(user._body._id);
+        expect(response.body).not.toHaveProperty("password");
+        expect(response.body.name).toBe("new name");
+      });
+  });
+
+  it("should not update if data isn't valid", async () => {
+    const { token } = await loginUser(TEST_USER);
+    [{ email: "foo" }, { name: "" }, { avatar: "bad-url" }].forEach(
+      async (badUpdate) => {
         await supertest(app)
-          .get("/users/me")
-          .set("authorization", token)
-          .expect(401)
+          .patch("/users/me")
+          .send(badUpdate)
+          .set("authorization", `Bearer ${token}`)
+          .expect(400)
           .then((response) => {
             expect(response.body).toHaveProperty("message");
           });
-      });
-    });
-
-    it("should return 403 if credentials are invalid", async () => {
-      FORBIDDEN_TOKENS.forEach(async (token) => {
-        await supertest(app)
-          .get("/users/me")
-          .set("authorization", token)
-          .expect(403)
-          .then((response) => {
-            expect(response.body).toHaveProperty("message");
-          });
-      });
-    });
+      }
+    );
   });
 });
