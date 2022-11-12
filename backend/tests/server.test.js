@@ -35,7 +35,7 @@ describe("GET routes without authorization", () => {
     });
   });
 
-  ["/users", "/items"].forEach((path) => {
+  ["/users"].forEach((path) => {
     it(`GET ${path} should return 401 missing authorization`, async () => {
       await supertest(app)
         .get(path)
@@ -44,6 +44,18 @@ describe("GET routes without authorization", () => {
           expect(response.body).toMatchObject({
             message: "Invalid credentials",
           });
+        });
+    });
+  });
+
+  ["/items"].forEach((path) => {
+    it(`GET ${path} should return 200`, async () => {
+      await supertest(app)
+        .get(path)
+        .expect(200)
+        .then((response) => {
+          expect(Array.isArray(response.body)).toBeTruthy();
+          expect(response.body.length).toBe(0);
         });
     });
   });

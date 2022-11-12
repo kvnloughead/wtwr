@@ -1,4 +1,5 @@
 const express = require("express");
+const { getItems } = require("./controllers/clothingItems");
 
 const { createUser, login } = require("./controllers/users");
 const handleError = require("./middleware/error-handler");
@@ -16,6 +17,7 @@ function createServer() {
 
   app.post("/signup", createUser);
   app.post("/signin", login);
+  app.get("/items", getItems);
 
   app.use("/", require("./routes"));
 
