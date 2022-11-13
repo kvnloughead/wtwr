@@ -1,9 +1,5 @@
-const mongoose = require("mongoose");
 const supertest = require("supertest");
 
-const createServer = require("../server");
-const User = require("../models/user");
-const ClothingItem = require("../models/clothingItem");
 const { DEFAULT_USER, TEST_USER } = require("../utils/constants");
 const {
   INVALID_CREDENTIALS,
@@ -13,33 +9,8 @@ const {
   FORBIDDEN_TOKENS,
 } = require("./constants");
 
-beforeEach((done) => {
-  mongoose.connect(
-    "mongodb://localhost:27017/wtwr_db_test",
-    { useNewUrlParser: true },
-    () => done()
-  );
-});
-
-afterEach(async () => {
-  await mongoose.connection.db.dropDatabase();
-  mongoose.connection.close();
-});
-
-const app = createServer();
-
-/**
- *
- * @param data - user's signin credentials
- * @param data.email - user's email
- * @param data.password - user's password
- * @returns object containing the user object and the token return by the API
- */
-const loginUser = async (data) => {
-  const user = await supertest(app).post("/signup").send(data);
-  const login = await supertest(app).post("/signin").send(data);
-  return { user, token: login._body.token };
-};
+const { app } = require("./setup");
+const { loginUser } = require("./helpers");
 
 describe("POST /signup", () => {
   it("should create a user with valid email and password", async () => {
@@ -113,31 +84,11 @@ describe("POST /signin", () => {
         });
     });
   });
-
-  describe("POST /items", () => {
-    it("should allow item creation if the user is authorized", async () => {
-      const user = await supertest(app).post("/signup").send(TEST_USER);
-      const login = await supertest(app).post("/signin").send(TEST_USER);
-      const { _id } = user._body;
-      const { token } = login._body;
-      await supertest(app)
-        .post("/items")
-        .set("authorization", `Bearer ${token}`)
-        .send({ ...TEST_ITEM, owner: _id })
-        .expect(201)
-        .then((response) => {
-          expect(response.body).toMatchObject({ ...TEST_ITEM, owner: _id });
-          expect(response.body.likes.length).toBe(0);
-          expect(response.body).toHaveProperty("createdAt");
-          expect(response.body).toHaveProperty("_id");
-        });
-    });
-  });
 });
 
 describe("GET /users/me", () => {
   it("should return current user's info if user is logged in", async () => {
-    const { user, token } = await loginUser(TEST_USER);
+    const { user, token } = await loginUser(app, TEST_USER);
     await supertest(app)
       .get("/users/me")
       .set("authorization", `Bearer ${token}`)
@@ -178,7 +129,7 @@ describe("GET /users/me", () => {
 
 describe("PUT /users/me", () => {
   it("should update if data is valid", async () => {
-    const { user, token } = await loginUser(TEST_USER);
+    const { user, token } = await loginUser(app, TEST_USER);
     await supertest(app)
       .patch("/users/me")
       .send({ name: "new name" })
@@ -194,7 +145,7 @@ describe("PUT /users/me", () => {
   });
 
   it("should not update if data isn't valid", async () => {
-    const { token } = await loginUser(TEST_USER);
+    const { token } = await loginUser(app, TEST_USER);
     [{ email: "foo" }, { name: "" }, { avatar: "bad-url" }].forEach(
       async (badUpdate) => {
         await supertest(app)

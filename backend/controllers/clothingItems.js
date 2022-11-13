@@ -1,5 +1,6 @@
 const ClothingItem = require("../models/clothingItem");
 const NotFoundError = require("../utils/errors/NotFoundError");
+const ForbiddenError = require("../utils/errors/ForbiddenError");
 
 const getItems = (req, res, next) => {
   ClothingItem.find({})
@@ -13,9 +14,15 @@ const createItem = (req, res, next) => {
     .catch(next);
 };
 
-const deleteItem = async (req, res, next) => {
-  const result = await ClothingItem.deleteOne({ _id: req.params.id }).orFail();
-  if (result.deletedCount === 0) throw new NotFoundError();
+const deleteItem = async (req, res) => {
+  const item = await ClothingItem.findOne({ _id: req.params.id }).orFail();
+  if (item.owner.toString() !== req.user._id) {
+    throw new ForbiddenError();
+  }
+  const result = await ClothingItem.deleteOne({ _id: req.params.id });
+  if (result.deletedCount === 0) {
+    throw new NotFoundError();
+  }
   res.status(200).send(result);
 };
 

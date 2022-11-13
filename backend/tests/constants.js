@@ -6,6 +6,12 @@ const TEST_USER = {
   password: "password",
 };
 
+const OTHER_USER = {
+  name: "Other user",
+  email: "other@test.com",
+  password: "password",
+};
+
 const TEST_USER_DEFAULTS = {
   email: "testing@test.com",
   password: "password",
@@ -48,12 +54,29 @@ const TEST_ITEM = {
     "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
 };
 
+const removeProperty = (obj, property) => {
+  const newObj = Object.assign({}, obj);
+  delete newObj[property];
+  return newObj;
+};
+
+const INVALID_ITEMS = [
+  { ...TEST_ITEM, name: "" },
+  { ...TEST_ITEM, weather: "yellow" },
+  { ...TEST_ITEM, imageUrl: "#" },
+  removeProperty(TEST_ITEM, "name"),
+  removeProperty(TEST_ITEM, "weather"),
+  removeProperty(TEST_ITEM, "imageUrl"),
+];
+
 module.exports = {
   TEST_USER,
+  OTHER_USER,
   TEST_USER_DEFAULTS,
   TEST_ITEM,
   INVALID_USERS,
   INVALID_CREDENTIALS,
   UNAUTHORIZED_TOKENS,
   FORBIDDEN_TOKENS,
+  INVALID_ITEMS,
 };
