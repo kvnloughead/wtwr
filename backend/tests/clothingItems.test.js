@@ -1,5 +1,6 @@
 const supertest = require("supertest");
-const { app } = require("./setup");
+const mongoose = require("mongoose");
+
 const { loginUser, createItem } = require("./helpers");
 const {
   TEST_USER,
@@ -7,6 +8,22 @@ const {
   TEST_ITEM,
   INVALID_ITEMS,
 } = require("./constants");
+
+const createServer = require("../server");
+const app = createServer();
+
+beforeEach((done) => {
+  mongoose.connect(
+    "mongodb://localhost:27017/wtwr_db_test_clothing",
+    { useNewUrlParser: true },
+    () => done()
+  );
+});
+
+afterEach(async () => {
+  await mongoose.connection.db.dropDatabase();
+  mongoose.connection.close();
+});
 
 describe("POST /items", () => {
   it("should allow item creation if the user is authorized", async () => {

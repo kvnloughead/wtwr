@@ -1,16 +1,30 @@
 const supertest = require("supertest");
+const mongoose = require("mongoose");
 
 const { DEFAULT_USER, TEST_USER } = require("../utils/constants");
 const {
   INVALID_CREDENTIALS,
   INVALID_USERS,
-  TEST_ITEM,
   UNAUTHORIZED_TOKENS,
   FORBIDDEN_TOKENS,
 } = require("./constants");
-
-const { app } = require("./setup");
 const { loginUser } = require("./helpers");
+
+const createServer = require("../server");
+const app = createServer();
+
+beforeEach((done) => {
+  mongoose.connect(
+    "mongodb://localhost:27017/wtwr_db_test",
+    { useNewUrlParser: true },
+    () => done()
+  );
+});
+
+afterEach(async () => {
+  await mongoose.connection.db.dropDatabase();
+  mongoose.connection.close();
+});
 
 describe("POST /signup", () => {
   it("should create a user with valid email and password", async () => {

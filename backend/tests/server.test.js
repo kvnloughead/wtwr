@@ -1,5 +1,21 @@
 const supertest = require("supertest");
-const { app } = require("./setup");
+const mongoose = require("mongoose");
+
+beforeEach((done) => {
+  mongoose.connect(
+    "mongodb://localhost:27017/wtwr_db_test_server",
+    { useNewUrlParser: true },
+    () => done()
+  );
+});
+
+afterEach(async () => {
+  await mongoose.connection.db.dropDatabase();
+  mongoose.connection.close();
+});
+
+const createServer = require("../server");
+const app = createServer();
 
 describe("GET routes without authorization", () => {
   ["/", "/badpath"].forEach((path) => {
