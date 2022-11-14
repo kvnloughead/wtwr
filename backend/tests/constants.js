@@ -55,7 +55,7 @@ const TEST_ITEM = {
 };
 
 const removeProperty = (obj, property) => {
-  const newObj = Object.assign({}, obj);
+  const newObj = { ...obj };
   delete newObj[property];
   return newObj;
 };

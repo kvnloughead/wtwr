@@ -2,6 +2,7 @@ const supertest = require("supertest");
 const mongoose = require("mongoose");
 
 const { loginUser, createItem } = require("./helpers");
+const createServer = require("../server");
 const {
   TEST_USER,
   OTHER_USER,
@@ -9,7 +10,6 @@ const {
   INVALID_ITEMS,
 } = require("./constants");
 
-const createServer = require("../server");
 const app = createServer();
 
 beforeEach((done) => {
@@ -72,7 +72,7 @@ describe("DELETE /item/:itemId", () => {
 
   it("should return 404 if no such item", async () => {
     const { token } = await loginUser(app, TEST_USER);
-    const item = await createItem(app, { token });
+    createItem(app, { token });
     await supertest(app)
       .delete(`/items/636eee3ae14708b0c35f62cc`)
       .set("authorization", `Bearer ${token}`)

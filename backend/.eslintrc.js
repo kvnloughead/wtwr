@@ -13,6 +13,14 @@ module.exports = {
   rules: {
     "no-underscore-dangle": 0,
     "no-console": ["error", { allow: ["log", "warn", "error"] }],
-    "func-names": ["warning", "as-needed"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: false,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
+    "func-names": [1, "as-needed"],
   },
 };

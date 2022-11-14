@@ -10,7 +10,7 @@ const supertest = require("supertest");
 const loginUser = async (app, data) => {
   const user = await supertest(app).post("/signup").send(data);
   const login = await supertest(app).post("/signin").send(data);
-  const _id = user._body._id;
+  const { _id } = user._body;
   return { _id, user, token: login._body.token };
 };
 
@@ -23,11 +23,10 @@ const loginUser = async (app, data) => {
  * @param {object} body - data for the body of the request
  * @returns an unresolved supertest promise
  */
-const createItem = async (app, data) => {
-  return await supertest(app)
+const createItem = async (app, data) =>
+  supertest(app)
     .post("/items")
     .set("authorization", `Bearer ${data.token}`)
     .send({ ...data.body, owner: data._id });
-};
 
 module.exports = { loginUser, createItem };

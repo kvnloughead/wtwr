@@ -6,6 +6,7 @@ const { getItems } = require("./controllers/clothingItems");
 const { createUser, login } = require("./controllers/users");
 const handleError = require("./middleware/error-handler");
 const NotFoundError = require("./utils/errors/NotFoundError");
+const routes = require("./routes");
 
 function createServer() {
   const app = express();
@@ -21,9 +22,9 @@ function createServer() {
   app.post("/signin", login);
   app.get("/items", getItems);
 
-  app.use("/", require("./routes"));
+  app.use("/", routes);
 
-  app.use("/", (req, res) => {
+  app.use("/", () => {
     throw new NotFoundError();
   });
 

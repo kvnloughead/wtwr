@@ -15,6 +15,7 @@ afterEach(async () => {
 });
 
 const createServer = require("../server");
+
 const app = createServer();
 
 describe("GET routes without authorization", () => {

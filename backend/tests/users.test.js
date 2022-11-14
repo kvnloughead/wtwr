@@ -11,6 +11,7 @@ const {
 const { loginUser } = require("./helpers");
 
 const createServer = require("../server");
+
 const app = createServer();
 
 beforeEach((done) => {
