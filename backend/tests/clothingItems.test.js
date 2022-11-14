@@ -95,3 +95,68 @@ describe("DELETE /item/:itemId", () => {
       });
   });
 });
+
+describe("PUT /items/:id/likes", () => {
+  it("should add user's _id to the array if not already there", async () => {
+    const { _id, token } = await loginUser(app, TEST_USER);
+    const item = await createItem(app, { _id, token, body: TEST_ITEM });
+    const otherUser = await loginUser(app, OTHER_USER);
+    // test user likes card
+    await supertest(app)
+      .patch(`/items/${item._body._id}/likes`)
+      .set("authorization", `Bearer ${token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.name).toBe(item._body.name);
+        expect(response.body.likes).toStrictEqual([_id]);
+      });
+    // other user likes card
+    await supertest(app)
+      .patch(`/items/${item._body._id}/likes`)
+      .set("authorization", `Bearer ${otherUser.token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.name).toBe(item._body.name);
+        expect(response.body.likes).toStrictEqual([_id, otherUser._id]);
+      });
+    // another has no effect
+    await supertest(app)
+      .patch(`/items/${item._body._id}/likes`)
+      .set("authorization", `Bearer ${otherUser.token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.name).toBe(item._body.name);
+        expect(response.body.likes).toStrictEqual([_id, otherUser._id]);
+      });
+  });
+});
+
+describe("DELETE /items/:id/likes", () => {
+  it("should remove user's _id from the array if it's present", async () => {
+    const { _id, token } = await loginUser(app, TEST_USER);
+    const item = await createItem(app, { _id, token, body: TEST_ITEM });
+    await supertest(app)
+      .patch(`/items/${item._body._id}/likes`)
+      .set("authorization", `Bearer ${token}`)
+      .then((response) => {
+        expect(response.body.name).toBe(item._body.name);
+        expect(response.body.likes).toStrictEqual([_id]);
+      });
+    await supertest(app)
+      .delete(`/items/${item._body._id}/likes`)
+      .set("authorization", `Bearer ${token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.name).toBe(item._body.name);
+        expect(response.body.likes).toStrictEqual([]);
+      });
+    await supertest(app)
+      .delete(`/items/${item._body._id}/likes`)
+      .set("authorization", `Bearer ${token}`)
+      .expect(200)
+      .then((response) => {
+        expect(response.body.name).toBe(item._body.name);
+        expect(response.body.likes).toStrictEqual([]);
+      });
+  });
+});

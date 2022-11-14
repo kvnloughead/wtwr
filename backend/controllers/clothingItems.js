@@ -28,7 +28,7 @@ const deleteItem = async (req, res) => {
 
 const setLike = (req, res, next) => {
   const action =
-    req.method === "PUT"
+    req.method === "PATCH"
       ? { $addToSet: { likes: req.user._id } }
       : { $pull: { likes: req.user._id } };
   ClothingItem.findByIdAndUpdate(req.params.itemId, action, { new: true })
