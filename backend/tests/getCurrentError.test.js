@@ -1,4 +1,4 @@
-const { getCurrentError } = require("../utils/errors/index");
+const { getCurrentError } = require("../middleware/error-handler");
 
 const simpleErrors = [
   { name: "CastError", status: 400, message: "Invalid request" },
