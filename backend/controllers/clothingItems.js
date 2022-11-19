@@ -1,6 +1,5 @@
 const ClothingItem = require("../models/clothingItem");
-const NotFoundError = require("../utils/errors/NotFoundError");
-const ForbiddenError = require("../utils/errors/ForbiddenError");
+const { NotFoundError, ForbiddenError } = require("../utils/errors");
 
 const getItems = (req, res, next) => {
   ClothingItem.find({})

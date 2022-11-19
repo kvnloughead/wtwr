@@ -1,7 +1,8 @@
-class ForbiddenError extends Error {
+const CustomError = require("./CustomError");
+
+class ForbiddenError extends CustomError {
   constructor(message = "Authorization required") {
     super(message);
-    this.name = "ForbiddenError";
     this.statusCode = 403;
   }
 }

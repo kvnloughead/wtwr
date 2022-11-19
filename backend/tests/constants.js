@@ -69,6 +69,68 @@ const INVALID_ITEMS = [
   removeProperty(TEST_ITEM, "imageUrl"),
 ];
 
+const SIMPLE_ERRORS = [
+  {
+    received: { name: "CastError" },
+    expected: {
+      status: 400,
+      message: "Invalid request",
+      name: "BadRequestError",
+    },
+  },
+  {
+    received: { name: "ValidationError" },
+    expected: {
+      status: 400,
+      message: "Invalid request",
+      name: "BadRequestError",
+    },
+  },
+  {
+    received: { name: "DocumentNotFoundError" },
+    expected: {
+      status: 404,
+      message: "Requested resource not found",
+      name: "NotFoundError",
+    },
+  },
+  {
+    received: { name: "SomeOtherError" },
+    expected: {
+      status: 500,
+      message: "An error has occurred on the server",
+      name: "InternalServerError",
+    },
+  },
+];
+
+const MONGO_SERVER_ERRORS = [
+  {
+    received: { code: 11000 },
+    expected: {
+      status: 409,
+      message: "Email already in use",
+      name: "ConflictError",
+    },
+  },
+  {
+    received: { code: 10101 },
+    expected: {
+      status: 500,
+      message: "An error has occurred on the server",
+      name: "InternalServerError",
+    },
+  },
+  {
+    received: { code: undefined },
+    expected: {
+      status: 500,
+      message: "An error has occurred on the server",
+      name: "InternalServerError",
+    },
+  },
+];
+
 module.exports = {
   TEST_USER,
   OTHER_USER,
@@ -79,4 +141,6 @@ module.exports = {
   UNAUTHORIZED_TOKENS,
   FORBIDDEN_TOKENS,
   INVALID_ITEMS,
+  SIMPLE_ERRORS,
+  MONGO_SERVER_ERRORS,
 };

@@ -1,7 +1,8 @@
-class ConflictError extends Error {
+const CustomError = require("./CustomError");
+
+class ConflictError extends CustomError {
   constructor(message = "Resource already exists") {
     super(message);
-    this.name = "ConflictError";
     this.statusCode = 409;
   }
 }

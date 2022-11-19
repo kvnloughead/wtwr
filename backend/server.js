@@ -5,7 +5,7 @@ const { getItems } = require("./controllers/clothingItems");
 
 const { createUser, login } = require("./controllers/users");
 const { handleError } = require("./middleware/error-handler");
-const NotFoundError = require("./utils/errors/NotFoundError");
+const { NotFoundError } = require("./utils/errors");
 const routes = require("./routes");
 
 function createServer() {

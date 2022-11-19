@@ -1,7 +1,8 @@
-class UnauthorizedError extends Error {
+const CustomError = require("./CustomError");
+
+class UnauthorizedError extends CustomError {
   constructor(message = "Invalid credentials") {
     super(message);
-    this.name = "UnauthorizedError";
     this.statusCode = 401;
   }
 }

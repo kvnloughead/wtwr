@@ -1,19 +1,14 @@
-const BadRequestError = require("../utils/errors/BadRequestError");
-const InternalServerError = require("../utils/errors/InternalServerError");
-const NotFoundError = require("../utils/errors/NotFoundError");
-const ConflictError = require("../utils/errors/ConflictError");
+const {
+  BadRequestError,
+  InternalServerError,
+  NotFoundError,
+  ConflictError,
+} = require("../utils/errors");
 
-const customErrors = [
-  "BadRuestError",
-  "NotFoundError",
-  "ConflictError",
-  "UnauthorizedError",
-  "InternalServerError",
-  "ForbiddenError",
-];
+const customErrorNames = Object.keys(require("../utils/errors"));
 
 const getCurrentError = (err) => {
-  if (customErrors.includes(err.name)) return err;
+  if (customErrorNames.includes(err.name)) return err;
   if (err.name === "CastError") return new BadRequestError();
   if (err.name === "ValidationError") return new BadRequestError();
   if (err.name === "DocumentNotFoundError") return new NotFoundError();
