@@ -22,11 +22,63 @@
         "runOn": "folderOpen",
       },
       "presentation": {
-            "reveal": "always",
-            "panel": "new"
+        "reveal": "always",
+        "panel": "new"
       },
       "options": {
         "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true
+    },
+
+    {
+      "label": "backend tests",
+      "type": "shell",
+      "command": "npm run test-watch",
+      "runOptions": {
+        "runOn": "folderOpen",
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "isBackground": true,
+      "group": "test"
+    },
+
+    {
+      "label": "frontend",
+      "type": "shell",
+      "command": "npm run start",
+      "runOptions": {
+        "runOn": "folderOpen",
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "isBackground": true,
+    },
+
+    
+    {
+      "label": "frontend prettier",
+      "type": "shell",
+      "command": "npm run prettier-watch",
+      "runOptions": {
+        "runOn": "folderOpen",
+      },
+      "presentation": {
+        "reveal": "never",
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
       },
       "isBackground": true
     },
