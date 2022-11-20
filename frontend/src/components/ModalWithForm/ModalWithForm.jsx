@@ -11,13 +11,14 @@ function ModalWithForm({
   isValid,
   title,
   children,
+  visible,
 }) {
   useEscape(closeModal);
 
   return (
     <div
       className={`modal modal_type_${activeModal} ${
-        activeModal === 'add' && 'modal_is-open'
+        visible && 'modal_is-open'
       }`}
     >
       <div className="modal__container">
@@ -53,7 +54,12 @@ ModalWithForm.propTypes = {
   handleSubmit: func.isRequired,
   title: string.isRequired,
   isValid: bool.isRequired,
+  visible: bool,
   children: oneOfType([arrayOf(node), node]).isRequired,
+};
+
+ModalWithForm.defaultProps = {
+  visible: false,
 };
 
 export default ModalWithForm;

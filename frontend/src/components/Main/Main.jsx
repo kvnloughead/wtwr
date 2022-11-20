@@ -8,7 +8,7 @@ import './Main.css';
 
 import AppContext from '../../contexts/AppContext';
 
-function Main({ openItemModal, weather }) {
+function Main({ openModal, weather }) {
   const { tempUnit, clothing } = useContext(AppContext);
 
   return (
@@ -21,11 +21,7 @@ function Main({ openItemModal, weather }) {
         {clothing
           .filter((item) => item.weather === getTempDescriptor(weather.temp.F))
           .map((item) => (
-            <ItemCard
-              key={item._id}
-              data={item}
-              openItemModal={openItemModal}
-            />
+            <ItemCard key={item._id} data={item} openModal={openModal} />
           ))}
       </ul>
     </main>
@@ -33,7 +29,7 @@ function Main({ openItemModal, weather }) {
 }
 
 Main.propTypes = {
-  openItemModal: func.isRequired,
+  openModal: func.isRequired,
   weather: shape({ temp: shape({ F: number, C: number }) }).isRequired,
 };
 

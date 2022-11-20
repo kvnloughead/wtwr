@@ -3,15 +3,15 @@ import PropTypes, { func, number, string } from 'prop-types';
 
 import './ItemCard.css';
 
-function ItemCard({ data, openItemModal }) {
+function ItemCard({ data, openModal }) {
   const [liked, setLiked] = React.useState(false);
-  const openModal = (evt) => {
-    if (!evt.target.classList.contains('card__like-button'))
-      openItemModal({ ...data, visible: true });
+
+  const openItemModal = (evt) => {
+    openModal(evt, { ...data, visible: true });
   };
 
   return (
-    <li role="presentation" className="card" onClick={openModal}>
+    <li role="presentation" className="card" onClick={openItemModal}>
       <div className="card__header">
         <h3 className="card__name">{data.name}</h3>
         <button
@@ -28,6 +28,7 @@ function ItemCard({ data, openItemModal }) {
         className="card__image"
         src={data.link}
         alt={`A ${data.name} for ${data.weather} weather.`}
+        data-modal="preview"
       />
     </li>
   );
@@ -40,7 +41,7 @@ ItemCard.propTypes = {
     weather: string,
     link: string,
   }).isRequired,
-  openItemModal: func.isRequired,
+  openModal: func.isRequired,
 };
 
 export default ItemCard;

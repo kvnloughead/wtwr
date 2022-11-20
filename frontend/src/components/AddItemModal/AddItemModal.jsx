@@ -7,12 +7,7 @@ import RadioButton from '../RadioButton/RadioButton';
 import useForm from '../../hooks/useForm';
 import './AddItemModal.css';
 
-function AddItemModal({
-  activeModal,
-  openAddModal,
-  closeModal,
-  handleAddItemSubmit,
-}) {
+function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
 
   const handleSubmit = (e) => {
@@ -26,11 +21,11 @@ function AddItemModal({
     <ModalWithForm
       title="New garment"
       activeModal={activeModal}
-      openAddModal={openAddModal}
       closeModal={closeModal}
       handleSubmit={handleSubmit}
       isValid={isValid}
       resetForm={resetForm}
+      visible={activeModal === 'add-item'}
     >
       <Input
         label="Name"
@@ -82,7 +77,6 @@ function AddItemModal({
 AddItemModal.propTypes = {
   activeModal: string.isRequired,
   closeModal: func.isRequired,
-  openAddModal: func.isRequired,
   handleAddItemSubmit: func.isRequired,
 };
 

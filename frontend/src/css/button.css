@@ -1,4 +1,4 @@
-.add-clothes-btn {
+.button {
   border: none;
   background-color: transparent;
   font-size: 20px;
@@ -8,13 +8,13 @@
   z-index: 1;
 }
 
-.add-clothes-btn::before {
+.button_action_add::before {
   content: '+ Add Clothes';
   font-family: 'CabinetGrotesk-Bold' Arial, Helvetica, sans-serif;
   font-weight: 700;
 }
 
-.add-clothes-btn:hover {
+.button:hover {
   color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }

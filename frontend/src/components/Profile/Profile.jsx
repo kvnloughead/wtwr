@@ -8,7 +8,7 @@ import { user } from '../../utils/constants';
 
 import AppContext from '../../contexts/AppContext';
 
-function Profile({ openAddModal, openItemModal }) {
+function Profile({ openModal }) {
   const { clothing } = useContext(AppContext);
 
   return (
@@ -23,20 +23,17 @@ function Profile({ openAddModal, openItemModal }) {
         <div>
           <h2>Your items</h2>
           <button
-            className="add-clothes-btn"
+            className="button"
             aria-label="add-clothes"
             type="button"
-            onClick={openAddModal}
+            data-modal="add-item"
+            onClick={openModal}
           />
         </div>
 
         <ul role="list" className="cards">
           {clothing.map((item) => (
-            <ItemCard
-              key={item._id}
-              data={item}
-              openItemModal={openItemModal}
-            />
+            <ItemCard key={item._id} data={item} openModal={openModal} />
           ))}
         </ul>
       </div>
@@ -45,7 +42,6 @@ function Profile({ openAddModal, openItemModal }) {
 }
 
 Profile.propTypes = {
-  openAddModal: func.isRequired,
-  openItemModal: func.isRequired,
+  openModal: func.isRequired,
 };
 export default Profile;

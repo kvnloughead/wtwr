@@ -23,7 +23,7 @@
   display: inline-block;
 }
 
-.profile .add-clothes-btn::before {
+.profile .button::before {
   color: #00000099;
   content: '+ Add new';
 }
