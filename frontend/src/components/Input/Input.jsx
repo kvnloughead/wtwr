@@ -1,11 +1,20 @@
-import { string, func } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 import React from 'react';
 import './Input.css';
 
-function Input({ label, placeholder, name, type, onChange, value, error }) {
+function Input({
+  label,
+  placeholder,
+  name,
+  type,
+  onChange,
+  value,
+  error,
+  required,
+}) {
   return (
     <label htmlFor={name}>
-      {label}
+      {`${label}${required ? '*' : ''}`}
       <input
         className="input"
         placeholder={placeholder}
@@ -13,7 +22,7 @@ function Input({ label, placeholder, name, type, onChange, value, error }) {
         type={type}
         onChange={onChange}
         value={value}
-        required
+        required={required}
       />
       <span className="input__error">{error}</span>
     </label>
@@ -28,10 +37,12 @@ Input.propTypes = {
   onChange: func.isRequired,
   value: string.isRequired,
   error: string,
+  required: bool,
 };
 
 Input.defaultProps = {
   error: '',
+  required: false,
 };
 
 export default Input;
