@@ -18,7 +18,8 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
 
   return (
     <ModalWithForm
-      title="New garment"
+      title="Create new garment"
+      submitText="Create garment"
       activeModal={activeModal}
       closeModal={closeModal}
       handleSubmit={handleSubmit}
