@@ -37,27 +37,29 @@ function LoginModal({ handleLogin, closeModal, activeModal, openModal }) {
         </span>
       }
     >
-      <Input
-        label="Email"
-        placeholder="Email"
-        name="email"
-        type="email"
-        onChange={handleChange}
-        value={values.email || ''}
-        error={errors.email}
-        required
-      />
-      <Input
-        label="Password"
-        placeholder="Password"
-        name="password"
-        type="password"
-        onChange={handleChange}
-        value={values.password || ''}
-        error={errors.password}
-        minlength={8}
-        required
-      />
+      <fieldset className="modal__fieldset">
+        <Input
+          label="Email"
+          placeholder="Email"
+          name="email"
+          type="email"
+          onChange={handleChange}
+          value={values.email || ''}
+          error={errors.email}
+          required
+        />
+        <Input
+          label="Password"
+          placeholder="Password"
+          name="password"
+          type="password"
+          onChange={handleChange}
+          value={values.password || ''}
+          error={errors.password}
+          minlength={8}
+          required
+        />
+      </fieldset>
     </ModalWithForm>
   );
 }

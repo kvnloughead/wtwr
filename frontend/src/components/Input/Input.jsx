@@ -15,8 +15,9 @@ function Input({
   ...rest
 }) {
   return (
-    <label htmlFor={name}>
-      {`${label}${required ? '*' : ''}`}
+    <label className="label" htmlFor={name}>
+      {label}
+      <span className="required">{required ? '*required' : ''}</span>
       <input
         className="input"
         placeholder={placeholder}
@@ -24,9 +25,10 @@ function Input({
         type={type}
         onChange={onChange}
         value={value}
+        required={required}
         {...rest}
       />
-      <span className="input__error">{error}</span>
+      <span className="error-message">{error}</span>
     </label>
   );
 }

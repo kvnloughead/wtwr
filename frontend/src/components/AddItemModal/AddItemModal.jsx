@@ -27,25 +27,28 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
       resetForm={resetForm}
       visible={activeModal === 'add-item'}
     >
-      <Input
-        label="Name"
-        placeholder="Name"
-        name="name"
-        type="text"
-        onChange={handleChange}
-        value={values.name || ''}
-        error={errors.name}
-      />
-      <Input
-        label="Image"
-        placeholder="Image URL"
-        name="link"
-        type="url"
-        onChange={handleChange}
-        value={values.link || ''}
-        error={errors.link}
-      />
       <fieldset className="modal__fieldset">
+        <Input
+          label="Name"
+          placeholder="Name"
+          name="name"
+          type="text"
+          onChange={handleChange}
+          value={values.name || ''}
+          error={errors.name}
+        />
+        <Input
+          label="Image"
+          placeholder="Image URL"
+          name="link"
+          type="url"
+          onChange={handleChange}
+          value={values.link || ''}
+          error={errors.link}
+        />
+      </fieldset>
+
+      <fieldset className="modal__fieldset modal__fieldset_radio">
         <legend className="modal__legend">Select the weather type:</legend>
         <RadioButton
           name="weather"

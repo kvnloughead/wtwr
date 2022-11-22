@@ -6,14 +6,19 @@
   width: 100%;
 }
 
-.input__error {
+.label .required {
+  color: #0000004d;
+  padding-left: 8px;
+}
+
+.label .error-message {
   display: block;
   padding: 6px 0 15px;
   height: 12px;
   font-size: 12px;
-  color: #cc0000;
+  color: #c80000;
 }
 
-.modal__input::placeholder {
+.input::placeholder {
   color: #00000080;
 }

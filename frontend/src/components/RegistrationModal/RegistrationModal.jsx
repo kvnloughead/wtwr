@@ -43,44 +43,46 @@ function RegistrationModal({
         </span>
       }
     >
-      <Input
-        label="Email"
-        placeholder="Email"
-        name="email"
-        type="email"
-        onChange={handleChange}
-        value={values.email || ''}
-        error={errors.email}
-        required
-      />
-      <Input
-        label="Password"
-        placeholder="Password"
-        name="password"
-        type="password"
-        onChange={handleChange}
-        value={values.password || ''}
-        error={errors.password}
-        required
-      />
-      <Input
-        label="Name"
-        placeholder="Name"
-        name="name"
-        type="text"
-        onChange={handleChange}
-        value={values.name || ''}
-        error={errors.name}
-      />
-      <Input
-        label="Avatar URL"
-        placeholder="Avatar URL"
-        name="avatar"
-        type="url"
-        onChange={handleChange}
-        value={values.avatar || ''}
-        error={errors.avatar}
-      />
+      <fieldset className="modal__fieldset">
+        <Input
+          label="Email"
+          placeholder="Email"
+          name="email"
+          type="email"
+          onChange={handleChange}
+          value={values.email || ''}
+          error={errors.email}
+          required
+        />
+        <Input
+          label="Password"
+          placeholder="Password"
+          name="password"
+          type="password"
+          onChange={handleChange}
+          value={values.password || ''}
+          error={errors.password}
+          required
+        />
+        <Input
+          label="Name"
+          placeholder="Name"
+          name="name"
+          type="text"
+          onChange={handleChange}
+          value={values.name || ''}
+          error={errors.name}
+        />
+        <Input
+          label="Avatar URL"
+          placeholder="Avatar URL"
+          name="avatar"
+          type="url"
+          onChange={handleChange}
+          value={values.avatar || ''}
+          error={errors.avatar}
+        />
+      </fieldset>
     </ModalWithForm>
   );
 }
