@@ -5,7 +5,6 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import Input from '../Input/Input';
 import RadioButton from '../RadioButton/RadioButton';
 import useForm from '../../hooks/useForm';
-import './AddItemModal.css';
 
 function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();

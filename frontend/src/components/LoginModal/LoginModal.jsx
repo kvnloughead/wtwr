@@ -4,7 +4,6 @@ import { func, string } from 'prop-types';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import Input from '../Input/Input';
 import useForm from '../../hooks/useForm';
-import './LoginModal.css';
 
 function LoginModal({ handleLogin, closeModal, activeModal, openModal }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
