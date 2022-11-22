@@ -10,8 +10,10 @@ function ModalWithForm({
   handleSubmit,
   isValid,
   title,
-  children,
+  submitText,
   visible,
+  children,
+  footer,
 }) {
   useEscape(closeModal);
 
@@ -35,13 +37,16 @@ function ModalWithForm({
           onSubmit={handleSubmit}
         >
           {children}
-          <button
-            className="modal__submit-button"
-            type="submit"
-            disabled={!isValid}
-          >
-            Add Garment
-          </button>
+          <fieldset className="modal__buttons">
+            <button
+              className="modal__submit-button"
+              type="submit"
+              disabled={!isValid}
+            >
+              {submitText || title}
+            </button>
+            {footer}
+          </fieldset>
         </form>
       </div>
     </div>
@@ -53,12 +58,16 @@ ModalWithForm.propTypes = {
   closeModal: func.isRequired,
   handleSubmit: func.isRequired,
   title: string.isRequired,
+  submitText: string,
   isValid: bool.isRequired,
   visible: bool,
   children: oneOfType([arrayOf(node), node]).isRequired,
+  footer: oneOfType([arrayOf(node), node]),
 };
 
 ModalWithForm.defaultProps = {
+  submitText: '',
+  footer: null,
   visible: false,
 };
 

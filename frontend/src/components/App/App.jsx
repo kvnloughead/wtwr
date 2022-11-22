@@ -17,7 +17,7 @@ import LoginModal from '../LoginModal/LoginModal';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState('');
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
   const [clothing, setClothing] = useState(defaultClothingItems);
@@ -107,16 +107,16 @@ function App() {
 
           <RegistrationModal
             activeModal={activeModal}
+            openModal={openModal}
             title="Registration"
             closeModal={closeModal}
-            handleAddItemSubmit={handleAddItemSubmit}
           />
 
           <LoginModal
             activeModal={activeModal}
+            openModal={openModal}
             title="Login"
             closeModal={closeModal}
-            handleAddItemSubmit={handleAddItemSubmit}
           />
 
           <ItemModal

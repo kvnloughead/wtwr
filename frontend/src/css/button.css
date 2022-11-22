@@ -18,3 +18,9 @@
   color: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
+
+.button_size_small {
+  font-size: 16px;
+  line-height: 20px;
+  color: #2f71e5;
+}

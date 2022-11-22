@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { string, func, bool } from 'prop-types';
 import React from 'react';
 import './Input.css';
@@ -11,6 +12,7 @@ function Input({
   value,
   error,
   required,
+  ...rest
 }) {
   return (
     <label htmlFor={name}>
@@ -22,7 +24,7 @@ function Input({
         type={type}
         onChange={onChange}
         value={value}
-        required={required}
+        {...rest}
       />
       <span className="input__error">{error}</span>
     </label>
