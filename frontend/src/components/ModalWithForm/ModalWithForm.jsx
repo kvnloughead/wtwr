@@ -6,7 +6,7 @@ import './ModalWithForm.css';
 
 function ModalWithForm({
   activeModal,
-  closeModal,
+  onClose,
   handleSubmit,
   isValid,
   title,
@@ -15,7 +15,7 @@ function ModalWithForm({
   children,
   footer,
 }) {
-  useEscape(closeModal);
+  useEscape(onClose);
 
   return (
     <div
@@ -29,7 +29,7 @@ function ModalWithForm({
           aria-label="close"
           type="button"
           className="modal__close-button"
-          onClick={closeModal}
+          onClick={onClose}
         />
         <form
           className="modal__form"
@@ -55,7 +55,7 @@ function ModalWithForm({
 
 ModalWithForm.propTypes = {
   activeModal: string.isRequired,
-  closeModal: func.isRequired,
+  onClose: func.isRequired,
   handleSubmit: func.isRequired,
   title: string.isRequired,
   submitText: string,

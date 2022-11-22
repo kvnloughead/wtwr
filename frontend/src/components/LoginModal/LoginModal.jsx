@@ -8,11 +8,12 @@ import useForm from '../../hooks/useForm';
 function LoginModal({ handleLogin, closeModal, activeModal, openModal }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
 
+  const closeAndReset = () => closeModal(resetForm);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(values);
-    closeModal();
-    resetForm();
+    closeAndReset();
   };
 
   return (
@@ -20,7 +21,7 @@ function LoginModal({ handleLogin, closeModal, activeModal, openModal }) {
       title="Sign in"
       visible={activeModal === 'login'}
       activeModal={activeModal}
-      closeModal={closeModal}
+      onClose={closeAndReset}
       handleSubmit={handleSubmit}
       isValid={isValid}
       resetForm={resetForm}

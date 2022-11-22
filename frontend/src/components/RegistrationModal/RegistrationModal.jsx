@@ -13,11 +13,12 @@ function RegistrationModal({
 }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
 
+  const closeAndReset = () => closeModal(resetForm);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleRegistration(values);
-    closeModal();
-    resetForm();
+    closeAndReset();
   };
 
   return (
@@ -26,7 +27,7 @@ function RegistrationModal({
       submitText="Register"
       visible={activeModal === 'registration'}
       activeModal={activeModal}
-      closeModal={closeModal}
+      onClose={closeAndReset}
       handleSubmit={handleSubmit}
       isValid={isValid}
       resetForm={resetForm}

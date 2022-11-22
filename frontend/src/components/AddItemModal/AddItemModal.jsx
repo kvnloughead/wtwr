@@ -9,11 +9,12 @@ import useForm from '../../hooks/useForm';
 function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
 
+  const closeAndReset = () => closeModal(resetForm);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleAddItemSubmit(values);
-    closeModal();
-    resetForm();
+    closeAndReset();
   };
 
   return (
@@ -22,6 +23,7 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
       submitText="Create garment"
       activeModal={activeModal}
       closeModal={closeModal}
+      onClose={closeAndReset}
       handleSubmit={handleSubmit}
       isValid={isValid}
       resetForm={resetForm}

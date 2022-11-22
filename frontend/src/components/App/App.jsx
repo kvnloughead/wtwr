@@ -36,7 +36,7 @@ function App() {
     if (modal === 'preview') setSelectedCard(card);
   };
 
-  const closeModal = () => {
+  const closeModal = (callback) => {
     setActiveModal('');
     setTimeout(() => {
       setSelectedCard({
@@ -46,6 +46,7 @@ function App() {
         link: '',
       });
     }, 500);
+    callback();
   };
 
   const toggleTempUnit = () => {
