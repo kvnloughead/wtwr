@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 require("express-async-errors");
 
 const { getItems } = require("./controllers/clothingItems");
@@ -10,6 +11,9 @@ const routes = require("./routes");
 
 function createServer() {
   const app = express();
+  app.options("*", cors());
+  app.use(cors());
+
   app.use(express.json({ extended: true }));
   app.use(express.urlencoded({ extended: true }));
 
