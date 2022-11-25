@@ -39,16 +39,8 @@ function App() {
     if (modal === 'preview') setSelectedCard(card);
   };
 
-  const closeModal = (callback) => {
+  const closeModal = (callback = () => {}) => {
     setActiveModal('');
-    setTimeout(() => {
-      setSelectedCard({
-        _id: -1,
-        name: '',
-        weather: '',
-        link: '',
-      });
-    }, 500);
     callback();
   };
 
@@ -153,7 +145,7 @@ function App() {
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            closeModal={closeModal}
+            onClose={closeModal}
             onRegistration={handleRegistration}
           />
 

@@ -1,8 +1,12 @@
 import React from 'react';
 import { func, oneOf, shape, string } from 'prop-types';
 
+// import useEscape from '../../hooks/useEscape';
+
 function MessageModal({ onClose, data }) {
   const visible = data.text.length !== 0;
+  // useEscape(onClose);
+
   return (
     <div className={`modal ${visible && 'modal_is-open'}`}>
       <div className="modal__container">
