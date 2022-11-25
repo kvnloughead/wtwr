@@ -6,7 +6,7 @@ import Input from '../Input/Input';
 import useForm from '../../hooks/useForm';
 
 function RegistrationModal({
-  handleRegistration,
+  onRegistration,
   closeModal,
   activeModal,
   openModal,
@@ -15,10 +15,10 @@ function RegistrationModal({
 
   const closeAndReset = () => closeModal(resetForm);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleRegistration(values);
-    closeAndReset();
+    const res = await onRegistration(values);
+    if (!res.message) closeAndReset();
   };
 
   return (
@@ -91,7 +91,7 @@ function RegistrationModal({
 RegistrationModal.propTypes = {
   activeModal: string.isRequired,
   closeModal: func.isRequired,
-  handleRegistration: func.isRequired,
+  onRegistration: func.isRequired,
   openModal: func,
 };
 

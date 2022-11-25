@@ -5,14 +5,14 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import Input from '../Input/Input';
 import useForm from '../../hooks/useForm';
 
-function LoginModal({ handleLogin, closeModal, activeModal, openModal }) {
+function LoginModal({ closeModal, activeModal, openModal, onLogin }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
 
   const closeAndReset = () => closeModal(resetForm);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleLogin(values);
+    onLogin();
     closeAndReset();
   };
 
@@ -57,7 +57,7 @@ function LoginModal({ handleLogin, closeModal, activeModal, openModal }) {
           onChange={handleChange}
           value={values.password || ''}
           error={errors.password}
-          minlength={8}
+          minLength={8}
           required
         />
       </fieldset>
@@ -69,7 +69,7 @@ LoginModal.propTypes = {
   openModal: func,
   activeModal: string.isRequired,
   closeModal: func.isRequired,
-  handleLogin: func.isRequired,
+  onLogin: func.isRequired,
 };
 
 LoginModal.defaultProps = {

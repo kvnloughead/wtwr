@@ -1,17 +1,23 @@
 import React from 'react';
 import { func, oneOf, shape, string } from 'prop-types';
 
-function MessageModal({ onClose, message }) {
-  const visible = message.text.length !== 0;
+function MessageModal({ onClose, data }) {
+  const visible = data.text.length !== 0;
   return (
     <div className={`modal ${visible && 'modal_is-open'}`}>
       <div className="modal__container">
-        <p className={`modal__message_${message.status}`}>{message.text}</p>
+        <h2 className="modal__title modal__title_place_message">
+          {data.status === 'success' ? 'Success!' : 'Something went wrong'}
+        </h2>
+        <p className={`modal__message modal__message_${data.status}`}>
+          {data.text}
+        </p>
         <button
           aria-label="close"
           type="button"
           className="modal__close-button"
           onClick={onClose}
+          tabIndex={0}
         />
       </div>
     </div>
@@ -19,12 +25,15 @@ function MessageModal({ onClose, message }) {
 }
 
 MessageModal.propTypes = {
-  message: shape({ status: oneOf(['error', 'success']), text: string }),
+  data: shape({
+    status: oneOf(['success', 'error', '']),
+    text: string,
+  }),
   onClose: func.isRequired,
 };
 
 MessageModal.defaultProps = {
-  message: { status: 'success', text: '' },
+  data: { status: '', text: '' },
 };
 
 export default MessageModal;

@@ -39,6 +39,10 @@
   margin: 0 0 24px;
 }
 
+.modal__title_place_message {
+  margin: 0;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -132,7 +136,7 @@
   line-height: 1.2;
 }
 
-.modal__message_success {
+.modal__message {
   font-size: 20px;
   line-height: 1.2;
   text-align: center;

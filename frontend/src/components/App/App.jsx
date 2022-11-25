@@ -8,6 +8,7 @@ import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import defaultClothingItems from '../../utils/clothing';
+import api from '../../utils/api';
 import './App.css';
 
 import { coords, apiKey } from '../../utils/constants';
@@ -15,10 +16,12 @@ import getWeather from '../../utils/weatherApi';
 import AppContext from '../../contexts/AppContext';
 import LoginModal from '../LoginModal/LoginModal';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
+import MessageModal from '../MessageModal/MessageModal';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState('');
+  const [message, setMessage] = useState({ status: '', text: '' });
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
   const [clothing, setClothing] = useState(defaultClothingItems);
   const [selectedCard, setSelectedCard] = useState({
@@ -49,17 +52,42 @@ function App() {
     callback();
   };
 
+  const closeMessageModal = () => {
+    setMessage({ status: '', text: '' });
+  };
+
   const toggleTempUnit = () => {
     setTempUnit(tempUnit === 'F' ? 'C' : 'F');
   };
 
   const AppContextValue = useMemo(
-    () => ({ loggedIn, setLoggedIn, clothing, tempUnit, toggleTempUnit }),
-    [clothing, tempUnit]
+    () => ({ loggedIn, clothing, tempUnit, toggleTempUnit }),
+    [clothing, tempUnit, loggedIn]
   );
 
   const handleAddItemSubmit = (values) => {
     setClothing([{ ...values, _id: clothing.length }, ...clothing]);
+  };
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+  };
+
+  const handleRegistration = async (values) => {
+    const res = await api.signup(values);
+    if (res.message)
+      setMessage({
+        status: 'error',
+        text: res.message,
+      });
+    else {
+      setMessage({
+        status: 'success',
+        text: 'Your account has been created',
+      });
+      setLoggedIn(true);
+    }
+    return res;
   };
 
   React.useEffect(() => {
@@ -107,6 +135,7 @@ function App() {
           />
 
           <RegistrationModal
+            onRegistration={handleRegistration}
             activeModal={activeModal}
             openModal={openModal}
             title="Registration"
@@ -118,12 +147,20 @@ function App() {
             openModal={openModal}
             title="Login"
             closeModal={closeModal}
+            onLogin={handleLogin}
           />
 
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
             closeModal={closeModal}
+            onRegistration={handleRegistration}
+          />
+
+          <MessageModal
+            onClose={closeMessageModal}
+            data={message}
+            openModal={openModal}
           />
         </AppContext.Provider>
       </div>
