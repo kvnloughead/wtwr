@@ -1,7 +1,7 @@
 import { func, string, oneOfType, arrayOf, node, bool } from 'prop-types';
 import React from 'react';
 
-import useEscape from '../../hooks/useEscape';
+// import useEscape from '../../hooks/useEscape';
 import './ModalWithForm.css';
 
 function ModalWithForm({
@@ -15,7 +15,7 @@ function ModalWithForm({
   children,
   footer,
 }) {
-  useEscape(onClose);
+  // useEscape(onClose);
 
   return (
     <div

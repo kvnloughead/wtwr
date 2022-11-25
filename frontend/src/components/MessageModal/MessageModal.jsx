@@ -1,10 +1,13 @@
 import React from 'react';
-import { func, oneOf, shape, string } from 'prop-types';
+import { func, oneOf, shape, string, bool } from 'prop-types';
+
+import useEscape from '../../hooks/useEscape';
 
 function MessageModal({ onClose, data }) {
-  const visible = data.text.length !== 0;
+  useEscape(onClose);
+
   return (
-    <div className={`modal ${visible && 'modal_is-open'}`}>
+    <div className={`modal ${data.open && 'modal_is-open'}`}>
       <div className="modal__container">
         <h2 className="modal__title modal__title_place_message">
           {data.status === 'success' ? 'Success!' : 'Something went wrong'}
@@ -28,12 +31,9 @@ MessageModal.propTypes = {
   data: shape({
     status: oneOf(['success', 'error', '']),
     text: string,
-  }),
+    open: bool,
+  }).isRequired,
   onClose: func.isRequired,
-};
-
-MessageModal.defaultProps = {
-  data: { status: '', text: '' },
 };
 
 export default MessageModal;

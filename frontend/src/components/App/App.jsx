@@ -21,7 +21,7 @@ import MessageModal from '../MessageModal/MessageModal';
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState('');
-  const [message, setMessage] = useState({ status: '', text: '' });
+  const [message, setMessage] = useState({ status: '', text: '', open: false });
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
   const [clothing, setClothing] = useState(defaultClothingItems);
   const [selectedCard, setSelectedCard] = useState({
@@ -39,21 +39,13 @@ function App() {
     if (modal === 'preview') setSelectedCard(card);
   };
 
-  const closeModal = (callback) => {
+  const closeModal = (callback = () => {}) => {
     setActiveModal('');
-    setTimeout(() => {
-      setSelectedCard({
-        _id: -1,
-        name: '',
-        weather: '',
-        link: '',
-      });
-    }, 500);
     callback();
   };
 
   const closeMessageModal = () => {
-    setMessage({ status: '', text: '' });
+    setMessage({ ...message, open: false });
   };
 
   const toggleTempUnit = () => {
@@ -79,11 +71,13 @@ function App() {
       setMessage({
         status: 'error',
         text: res.message,
+        open: true,
       });
     else {
       setMessage({
         status: 'success',
         text: 'Your account has been created',
+        open: true,
       });
       setLoggedIn(true);
     }
@@ -153,7 +147,7 @@ function App() {
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            closeModal={closeModal}
+            onClose={closeModal}
             onRegistration={handleRegistration}
           />
 

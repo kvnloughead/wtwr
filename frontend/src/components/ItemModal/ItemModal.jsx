@@ -4,8 +4,8 @@ import React from 'react';
 import useEscape from '../../hooks/useEscape';
 import './ItemModal.css';
 
-function ItemModal({ card, closeModal, activeModal }) {
-  useEscape(closeModal);
+function ItemModal({ card, onClose, activeModal }) {
+  useEscape(onClose);
   return (
     <div className={`modal ${activeModal === 'preview' && 'modal_is-open'}`}>
       <div className="modal__container modal__container_type_preview">
@@ -13,7 +13,7 @@ function ItemModal({ card, closeModal, activeModal }) {
           aria-label="close"
           type="button"
           className="modal__close-button"
-          onClick={closeModal}
+          onClick={onClose}
         />
         <img
           className="modal__image"
@@ -34,7 +34,7 @@ ItemModal.propTypes = {
     weather: string,
     link: string,
   }).isRequired,
-  closeModal: func.isRequired,
+  onClose: func.isRequired,
   activeModal: string.isRequired,
 };
 
