@@ -131,3 +131,13 @@
   font-size: 20px;
   line-height: 1.2;
 }
+
+.modal__message_success {
+  font-size: 20px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.modal__message_error {
+  color: #c80000;
+}
