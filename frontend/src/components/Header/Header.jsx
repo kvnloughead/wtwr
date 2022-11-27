@@ -2,13 +2,12 @@ import React, { useContext } from 'react';
 import { func, number, shape, string } from 'prop-types';
 
 import logo from '../../images/logo.svg';
-import avatar from '../../images/avatar.png';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import AppContext from '../../contexts/AppContext';
 import './Header.css';
 
 function Header({ openModal, location }) {
-  const { loggedIn } = useContext(AppContext);
+  const { loggedIn, currentUser } = useContext(AppContext);
 
   const date = new Date().toLocaleString('default', {
     month: 'short',
@@ -38,8 +37,12 @@ function Header({ openModal, location }) {
               data-modal="add-item"
             />
             <div className="user">
-              <p className="name ellipsis">Kevin James Loughead</p>
-              <img className="avatar" src={avatar} alt="User's avatar" />
+              <p className="name ellipsis">{currentUser.name}</p>
+              <img
+                className="avatar"
+                src={currentUser.avatar}
+                alt="User's avatar"
+              />
             </div>
           </>
         ) : (

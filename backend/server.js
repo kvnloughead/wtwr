@@ -28,7 +28,9 @@ function createServer() {
 
   app.use("/", routes);
 
-  app.use("/", () => {
+  app.use("/", (req) => {
+    console.log("here");
+    console.log(req);
     throw new NotFoundError();
   });
 

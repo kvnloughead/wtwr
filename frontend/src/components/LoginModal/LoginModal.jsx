@@ -10,10 +10,10 @@ function LoginModal({ closeModal, activeModal, openModal, onLogin }) {
 
   const closeAndReset = () => closeModal(resetForm);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onLogin();
-    closeAndReset();
+    const res = await onLogin(values);
+    if (!res.message) closeAndReset();
   };
 
   return (

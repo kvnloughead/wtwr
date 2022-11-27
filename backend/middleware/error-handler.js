@@ -18,6 +18,8 @@ const getCurrentError = (err) => {
 };
 
 const handleError = (err, req, res, next) => {
+  console.log("error handler");
+  console.log(err, req);
   const CurrentError = getCurrentError(err);
   res.status(CurrentError.statusCode).send({ message: CurrentError.message });
   next(err);

@@ -20,6 +20,7 @@ import MessageModal from '../MessageModal/MessageModal';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
   const [activeModal, setActiveModal] = useState('');
   const [message, setMessage] = useState({ status: '', text: '', open: false });
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
@@ -53,16 +54,48 @@ function App() {
   };
 
   const AppContextValue = useMemo(
-    () => ({ loggedIn, clothing, tempUnit, toggleTempUnit }),
-    [clothing, tempUnit, loggedIn]
+    () => ({
+      loggedIn,
+      clothing,
+      tempUnit,
+      currentUser,
+      setCurrentUser,
+      toggleTempUnit,
+    }),
+    [clothing, tempUnit, loggedIn, currentUser]
   );
 
   const handleAddItemSubmit = (values) => {
     setClothing([{ ...values, _id: clothing.length }, ...clothing]);
   };
 
-  const handleLogin = () => {
-    setLoggedIn(true);
+  const handleLogin = async (values) => {
+    const res = await api.signin(values);
+    if (res.message) {
+      setMessage({
+        status: 'error',
+        text: res.message,
+        open: true,
+      });
+    } else {
+      const user = await api.getCurrentUser(res.token);
+      if (user.message) {
+        setMessage({
+          status: 'error',
+          text: user.message,
+          open: true,
+        });
+      } else {
+        setCurrentUser(user);
+        setLoggedIn(true);
+        setMessage({
+          status: 'success',
+          text: 'You are logged in',
+          open: true,
+        });
+      }
+    }
+    return res;
   };
 
   const handleRegistration = async (values) => {
@@ -79,6 +112,7 @@ function App() {
         text: 'Your account has been created',
         open: true,
       });
+      setCurrentUser(res);
       setLoggedIn(true);
     }
     return res;
