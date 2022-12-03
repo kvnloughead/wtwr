@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router';
 import React, { useState, useMemo } from 'react';
+import { Routes, Route, useNavigate } from 'react-router';
 
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -17,8 +17,11 @@ import AppContext from '../../contexts/AppContext';
 import LoginModal from '../LoginModal/LoginModal';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 import MessageModal from '../MessageModal/MessageModal';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
+  const navigate = useNavigate();
+
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [activeModal, setActiveModal] = useState('');
@@ -88,6 +91,7 @@ function App() {
       } else {
         setCurrentUser(user);
         setLoggedIn(true);
+        navigate('/profile');
         setMessage({
           status: 'success',
           text: 'You are logged in',
@@ -148,7 +152,11 @@ function App() {
             />
             <Route
               path="/profile"
-              element={<Profile openModal={openModal} clothing={clothing} />}
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <Profile openModal={openModal} clothing={clothing} />
+                </ProtectedRoute>
+              }
               weather={weather}
             />
           </Routes>
