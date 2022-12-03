@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { func, number, shape, string } from 'prop-types';
 
 import logo from '../../images/logo.svg';
@@ -16,7 +17,9 @@ function Header({ openModal, location }) {
 
   return (
     <header className="header">
-      <img className="header__logo" src={logo} alt="WTWR logo" />
+      <NavLink to="/">
+        <img className="header__logo" src={logo} alt="WTWR logo" />
+      </NavLink>
       <div className="header__time-and-place ellipsis">
         <span>
           <time className="header__time" dateTime={date}>
@@ -36,14 +39,16 @@ function Header({ openModal, location }) {
               onClick={openModal}
               data-modal="add-item"
             />
-            <div className="user">
-              <p className="name ellipsis">{currentUser.name}</p>
-              <img
-                className="avatar"
-                src={currentUser.avatar}
-                alt="User's avatar"
-              />
-            </div>
+            <NavLink to="/profile" style={{ textDecoration: 'none' }}>
+              <div className="user">
+                <p className="name ellipsis">{currentUser.name}</p>
+                <img
+                  className="avatar"
+                  src={currentUser.avatar}
+                  alt="User's avatar"
+                />
+              </div>
+            </NavLink>
           </>
         ) : (
           <>
