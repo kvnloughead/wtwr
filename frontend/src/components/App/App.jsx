@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router';
 
 import Header from '../Header/Header';
@@ -23,6 +23,8 @@ function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = useState({});
   const [activeModal, setActiveModal] = useState('');
   const [message, setMessage] = useState({ status: '', text: '', open: false });
@@ -72,6 +74,14 @@ function App() {
     setClothing([{ ...values, _id: clothing.length }, ...clothing]);
   };
 
+  const loginUser = (user, validToken) => {
+    setToken(validToken);
+    localStorage.setItem('token', validToken);
+    setCurrentUser(user);
+    setLoggedIn(true);
+    navigate('/profile');
+  };
+
   const handleLogin = async (values) => {
     const res = await api.signin(values);
     if (res.message) {
@@ -89,14 +99,7 @@ function App() {
           open: true,
         });
       } else {
-        setCurrentUser(user);
-        setLoggedIn(true);
-        navigate('/profile');
-        setMessage({
-          status: 'success',
-          text: 'You are logged in',
-          open: true,
-        });
+        loginUser(user, res.token);
       }
     }
     return res;
@@ -116,13 +119,12 @@ function App() {
         text: 'Your account has been created',
         open: true,
       });
-      setCurrentUser(res);
-      setLoggedIn(true);
+      handleLogin(values);
     }
     return res;
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     getWeather(location, apiKey)
       .then((data) => {
         setWeather({
@@ -137,6 +139,16 @@ function App() {
         setLocation({ ...location, city: data.name });
       })
       .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    const checkToken = async () => {
+      if (token) {
+        const user = await api.getCurrentUser(token);
+        loginUser(user, token);
+      }
+    };
+    checkToken();
   }, []);
 
   return (
