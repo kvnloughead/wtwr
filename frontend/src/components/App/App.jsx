@@ -153,65 +153,63 @@ function App() {
 
   return (
     <div className="page">
-      <div className="page__wrapper">
-        <AppContext.Provider value={AppContextValue}>
-          <Header openModal={openModal} location={location} />
+      <AppContext.Provider value={AppContextValue}>
+        <Header openModal={openModal} location={location} />
 
-          <Routes>
-            <Route
-              path="/"
-              element={<Main openModal={openModal} weather={weather} />}
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProtectedRoute loggedIn={loggedIn}>
-                  <Profile openModal={openModal} clothing={clothing} />
-                </ProtectedRoute>
-              }
-              weather={weather}
-            />
-          </Routes>
-
-          <Footer />
-
-          <AddItemModal
-            activeModal={activeModal}
-            title="New garment"
-            closeModal={closeModal}
-            handleAddItemSubmit={handleAddItemSubmit}
+        <Routes>
+          <Route
+            path="/"
+            element={<Main openModal={openModal} weather={weather} />}
           />
-
-          <RegistrationModal
-            onRegistration={handleRegistration}
-            activeModal={activeModal}
-            openModal={openModal}
-            title="Registration"
-            closeModal={closeModal}
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Profile openModal={openModal} clothing={clothing} />
+              </ProtectedRoute>
+            }
+            weather={weather}
           />
+        </Routes>
 
-          <LoginModal
-            activeModal={activeModal}
-            openModal={openModal}
-            title="Login"
-            closeModal={closeModal}
-            onLogin={handleLogin}
-          />
+        <Footer />
 
-          <ItemModal
-            activeModal={activeModal}
-            card={selectedCard}
-            onClose={closeModal}
-            onRegistration={handleRegistration}
-          />
+        <AddItemModal
+          activeModal={activeModal}
+          title="New garment"
+          closeModal={closeModal}
+          handleAddItemSubmit={handleAddItemSubmit}
+        />
 
-          <MessageModal
-            onClose={closeMessageModal}
-            data={message}
-            openModal={openModal}
-          />
-        </AppContext.Provider>
-      </div>
+        <RegistrationModal
+          onRegistration={handleRegistration}
+          activeModal={activeModal}
+          openModal={openModal}
+          title="Registration"
+          closeModal={closeModal}
+        />
+
+        <LoginModal
+          activeModal={activeModal}
+          openModal={openModal}
+          title="Login"
+          closeModal={closeModal}
+          onLogin={handleLogin}
+        />
+
+        <ItemModal
+          activeModal={activeModal}
+          card={selectedCard}
+          onClose={closeModal}
+          onRegistration={handleRegistration}
+        />
+
+        <MessageModal
+          onClose={closeMessageModal}
+          data={message}
+          openModal={openModal}
+        />
+      </AppContext.Provider>
     </div>
   );
 }

@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.profile .container {
+  margin: 0 auto;
+}
+
 .profile .avatar {
   order: -1;
   width: 56px;
