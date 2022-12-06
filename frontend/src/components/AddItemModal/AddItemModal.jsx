@@ -7,11 +7,13 @@ import RadioButton from '../RadioButton/RadioButton';
 import useForm from '../../hooks/useForm';
 
 function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
-  const { values, errors, isValid, handleChange, resetForm } = useForm();
+  const { values, errors, isValid, handleChange, resetForm } = useForm({
+    weather: 'hot',
+  });
 
   const closeAndReset = () => closeModal(resetForm);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     handleAddItemSubmit(values);
     closeAndReset();
@@ -42,11 +44,11 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
         <Input
           label="Image"
           placeholder="Image URL"
-          name="link"
+          name="imageUrl"
           type="url"
           onChange={handleChange}
-          value={values.link || ''}
-          error={errors.link}
+          value={values.imageUrl || ''}
+          error={errors.imageUrl}
         />
       </fieldset>
 
@@ -55,24 +57,23 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
         <RadioButton
           name="weather"
           value="hot"
-          type="radio"
           handleChange={handleChange}
           label="Hot"
-          checked
+          radioChecked={values.weather}
         />
         <RadioButton
           name="weather"
           value="warm"
-          type="radio"
           handleChange={handleChange}
           label="Warm"
+          radioChecked={values.weather}
         />
         <RadioButton
           name="weather"
           value="cold"
-          type="radio"
           handleChange={handleChange}
           label="Cold"
+          radioChecked={values.weather}
         />
       </fieldset>
     </ModalWithForm>

@@ -35,6 +35,16 @@ class Api {
         'Content-Type': 'application/json',
       },
     }).then((res) => res.json());
+
+  createItem = (token, values) =>
+    fetch(`${this._baseUrl}/items`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ...values }),
+    }).then((res) => res.json());
 }
 
 const api = new Api('http://localhost:3001');

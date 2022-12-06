@@ -1,25 +1,19 @@
-import React, { useState } from 'react';
-import { string, func, bool } from 'prop-types';
+import React from 'react';
+import { string, func } from 'prop-types';
 
 import './RadioButton.css';
 
-function RadioButton({ value, type, name, handleChange, label, checked }) {
-  const [isChecked, setIsChecked] = useState(checked);
-  const onChange = (evt) => {
-    setIsChecked(true);
-    handleChange(evt);
-  };
-
+function RadioButton({ value, name, handleChange, label, radioChecked }) {
   return (
     <label htmlFor={value}>
       <input
         className="radio-button"
-        type={type}
+        type="radio"
         id={value}
         name={name}
         value={value}
-        onChange={onChange}
-        checked={isChecked}
+        onChange={handleChange}
+        checked={radioChecked === value}
       />
       {label}
     </label>
@@ -29,14 +23,9 @@ function RadioButton({ value, type, name, handleChange, label, checked }) {
 RadioButton.propTypes = {
   label: string.isRequired,
   name: string.isRequired,
-  type: string.isRequired,
   handleChange: func.isRequired,
   value: string.isRequired,
-  checked: bool,
-};
-
-RadioButton.defaultProps = {
-  checked: false,
+  radioChecked: string.isRequired,
 };
 
 export default RadioButton;

@@ -44,6 +44,10 @@ function App() {
     callback();
   };
 
+  const openMessageModal = (errorMessage, status = 'error') => {
+    setMessage({ status, text: errorMessage, open: true });
+  };
+
   const closeMessageModal = () => {
     setMessage({ ...message, open: false });
   };
@@ -64,8 +68,13 @@ function App() {
     [clothing, tempUnit, loggedIn, currentUser]
   );
 
-  const handleAddItemSubmit = (values) => {
-    setClothing([{ ...values, _id: clothing.length }, ...clothing]);
+  const handleAddItemSubmit = async (values) => {
+    const res = await api.createItem(token, values);
+    if (res.message) {
+      openMessageModal(message);
+    } else {
+      setClothing([{ ...res, _id: clothing.length }, ...clothing]);
+    }
   };
 
   const loginUser = (user, validToken) => {
@@ -74,10 +83,6 @@ function App() {
     setCurrentUser(user);
     setLoggedIn(true);
     navigate('/profile');
-  };
-
-  const openMessageModal = (errorMessage, status = 'error') => {
-    setMessage({ status, text: errorMessage, open: true });
   };
 
   const handleLogin = async (values) => {
