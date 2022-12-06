@@ -7,7 +7,6 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
 import AddItemModal from '../AddItemModal/AddItemModal';
-import defaultClothingItems from '../../utils/clothing';
 import api from '../../utils/api';
 import './App.css';
 
@@ -29,7 +28,7 @@ function App() {
   const [activeModal, setActiveModal] = useState('');
   const [message, setMessage] = useState({ status: '', text: '', open: false });
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
-  const [clothing, setClothing] = useState(defaultClothingItems);
+  const [clothing, setClothing] = useState([]);
   const [selectedCard, setSelectedCard] = useState({
     _id: -1,
     name: '',
@@ -124,7 +123,22 @@ function App() {
     return res;
   };
 
+  const getItems = async () => {
+    const res = await api.getItems();
+    if (res.message) {
+      console.error(res.message);
+      setMessage({
+        status: 'error',
+        text: res.message,
+        open: true,
+      });
+    } else {
+      setClothing(res);
+    }
+  };
+
   useEffect(() => {
+    getItems();
     getWeather(location, apiKey)
       .then((data) => {
         setWeather({

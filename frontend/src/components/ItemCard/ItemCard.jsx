@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes, { func, number, string } from 'prop-types';
+import PropTypes, { func, string } from 'prop-types';
 
 import './ItemCard.css';
 
@@ -26,7 +26,7 @@ function ItemCard({ data, openModal }) {
 
       <img
         className="card__image"
-        src={data.link}
+        src={data.imageUrl}
         alt={`A ${data.name} for ${data.weather} weather.`}
         data-modal="preview"
       />
@@ -36,10 +36,10 @@ function ItemCard({ data, openModal }) {
 
 ItemCard.propTypes = {
   data: PropTypes.shape({
-    _id: number,
+    _id: string,
     name: string,
     weather: string,
-    link: string,
+    imageUrl: string,
   }).isRequired,
   openModal: func.isRequired,
 };

@@ -28,6 +28,13 @@ class Api {
         authorization: `Bearer ${token}`,
       },
     }).then((res) => res.json());
+
+  getItems = () =>
+    fetch(`${this._baseUrl}/items`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => res.json());
 }
 
 const api = new Api('http://localhost:3001');
