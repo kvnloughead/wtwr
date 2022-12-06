@@ -29,12 +29,7 @@ function App() {
   const [message, setMessage] = useState({ status: '', text: '', open: false });
   const [weather, setWeather] = useState({ temp: { F: NaN, C: NaN } });
   const [clothing, setClothing] = useState([]);
-  const [selectedCard, setSelectedCard] = useState({
-    _id: -1,
-    name: '',
-    weather: '',
-    link: '',
-  });
+  const [selectedCard, setSelectedCard] = useState({});
   const [location, setLocation] = useState({ ...coords, city: '' });
   const [tempUnit, setTempUnit] = useState('F');
 

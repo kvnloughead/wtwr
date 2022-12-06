@@ -1,4 +1,4 @@
-import { shape, number, string, func } from 'prop-types';
+import { shape, string, func } from 'prop-types';
 import React from 'react';
 
 import useEscape from '../../hooks/useEscape';
@@ -17,7 +17,7 @@ function ItemModal({ card, onClose, activeModal }) {
         />
         <img
           className="modal__image"
-          src={card.link}
+          src={card.imageUrl}
           alt={`A ${card.name} for wearing in ${card.weather} weather.`}
         />
         <h3 className="modal__caption">{card.name}</h3>
@@ -29,10 +29,10 @@ function ItemModal({ card, onClose, activeModal }) {
 
 ItemModal.propTypes = {
   card: shape({
-    _id: number,
+    _id: string,
     name: string,
     weather: string,
-    link: string,
+    imageUrl: string,
   }).isRequired,
   onClose: func.isRequired,
   activeModal: string.isRequired,
