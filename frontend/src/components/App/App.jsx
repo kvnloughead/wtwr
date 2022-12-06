@@ -81,22 +81,18 @@ function App() {
     navigate('/profile');
   };
 
+  const openMessageModal = (errorMessage, status = 'error') => {
+    setMessage({ status, text: errorMessage, open: true });
+  };
+
   const handleLogin = async (values) => {
     const res = await api.signin(values);
     if (res.message) {
-      setMessage({
-        status: 'error',
-        text: res.message,
-        open: true,
-      });
+      openMessageModal(res.message);
     } else {
       const user = await api.getCurrentUser(res.token);
       if (user.message) {
-        setMessage({
-          status: 'error',
-          text: user.message,
-          open: true,
-        });
+        openMessageModal(user.message);
       } else {
         loginUser(user, res.token);
       }
@@ -106,18 +102,9 @@ function App() {
 
   const handleRegistration = async (values) => {
     const res = await api.signup(values);
-    if (res.message)
-      setMessage({
-        status: 'error',
-        text: res.message,
-        open: true,
-      });
+    if (res.message) openMessageModal(res.message);
     else {
-      setMessage({
-        status: 'success',
-        text: 'Your account has been created',
-        open: true,
-      });
+      openMessageModal('Your account has been created', 'success');
       handleLogin(values);
     }
     return res;
@@ -126,12 +113,7 @@ function App() {
   const getItems = async () => {
     const res = await api.getItems();
     if (res.message) {
-      console.error(res.message);
-      setMessage({
-        status: 'error',
-        text: res.message,
-        open: true,
-      });
+      openMessageModal(res.message);
     } else {
       setClothing(res);
     }
