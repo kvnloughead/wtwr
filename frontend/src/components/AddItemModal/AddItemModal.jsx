@@ -81,9 +81,13 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
 }
 
 AddItemModal.propTypes = {
-  activeModal: string.isRequired,
+  activeModal: string,
   closeModal: func.isRequired,
   handleAddItemSubmit: func.isRequired,
+};
+
+AddItemModal.defaultProps = {
+  activeModal: null,
 };
 
 export default AddItemModal;

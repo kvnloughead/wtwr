@@ -35,7 +35,11 @@ ItemModal.propTypes = {
     imageUrl: string,
   }).isRequired,
   onClose: func.isRequired,
-  activeModal: string.isRequired,
+  activeModal: string,
+};
+
+ItemModal.defaultProps = {
+  activeModal: null,
 };
 
 export default ItemModal;

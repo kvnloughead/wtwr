@@ -54,7 +54,7 @@ function ModalWithForm({
 }
 
 ModalWithForm.propTypes = {
-  activeModal: string.isRequired,
+  activeModal: string,
   onClose: func.isRequired,
   handleSubmit: func.isRequired,
   title: string.isRequired,
@@ -66,6 +66,7 @@ ModalWithForm.propTypes = {
 };
 
 ModalWithForm.defaultProps = {
+  activeModal: null,
   submitText: '',
   footer: null,
   visible: false,

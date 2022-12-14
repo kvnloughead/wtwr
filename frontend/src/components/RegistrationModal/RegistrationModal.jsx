@@ -89,7 +89,7 @@ function RegistrationModal({
 }
 
 RegistrationModal.propTypes = {
-  activeModal: string.isRequired,
+  activeModal: string,
   closeModal: func.isRequired,
   onRegistration: func.isRequired,
   openModal: func,
@@ -97,6 +97,7 @@ RegistrationModal.propTypes = {
 
 RegistrationModal.defaultProps = {
   openModal: null,
+  activeModal: null,
 };
 
 export default RegistrationModal;

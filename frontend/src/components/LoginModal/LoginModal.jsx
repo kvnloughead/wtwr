@@ -67,13 +67,14 @@ function LoginModal({ closeModal, activeModal, openModal, onLogin }) {
 
 LoginModal.propTypes = {
   openModal: func,
-  activeModal: string.isRequired,
+  activeModal: string,
   closeModal: func.isRequired,
   onLogin: func.isRequired,
 };
 
 LoginModal.defaultProps = {
   openModal: null,
+  activeModal: null,
 };
 
 export default LoginModal;
