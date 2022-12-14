@@ -45,6 +45,15 @@ class Api {
       },
       body: JSON.stringify({ ...values }),
     }).then((res) => res.json());
+
+  updateLike = (token, id, isLiked) =>
+    fetch(`${this._baseUrl}/items/${id}/likes`, {
+      method: `${isLiked ? 'PATCH' : 'DELETE'}`,
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    });
 }
 
 const api = new Api('http://localhost:3001');

@@ -56,18 +56,6 @@ function App() {
     setTempUnit(tempUnit === 'F' ? 'C' : 'F');
   };
 
-  const AppContextValue = useMemo(
-    () => ({
-      loggedIn,
-      clothing,
-      tempUnit,
-      currentUser,
-      setCurrentUser,
-      toggleTempUnit,
-    }),
-    [clothing, tempUnit, loggedIn, currentUser]
-  );
-
   const handleAddItemSubmit = async (values) => {
     const res = await api.createItem(token, values);
     if (res.message) {
@@ -118,6 +106,26 @@ function App() {
       setClothing(res);
     }
   };
+
+  const handleLikeClick = async (cardId, isLiked) => {
+    const res = await api.updateLike(token, cardId, isLiked);
+    if (res.message) {
+      openMessageModal(res.message);
+    }
+  };
+
+  const AppContextValue = useMemo(
+    () => ({
+      loggedIn,
+      clothing,
+      tempUnit,
+      currentUser,
+      setCurrentUser,
+      toggleTempUnit,
+      handleLikeClick,
+    }),
+    [clothing, tempUnit, loggedIn, currentUser]
+  );
 
   useEffect(() => {
     getItems();

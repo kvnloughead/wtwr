@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes, { func, string } from 'prop-types';
 
 import './ItemCard.css';
+import AppContext from '../../contexts/AppContext';
 
 function ItemCard({ data, openModal }) {
+  const { handleLikeClick } = useContext(AppContext);
   const [liked, setLiked] = React.useState(false);
+
+  const onClick = () => {
+    const isLiked = setLiked(!liked);
+    handleLikeClick(data._id, isLiked);
+  };
 
   const openItemModal = (evt) => {
     openModal(evt, { ...data, visible: true });
@@ -15,7 +22,7 @@ function ItemCard({ data, openModal }) {
       <div className="card__header">
         <h3 className="card__name">{data.name}</h3>
         <button
-          onClick={() => setLiked(!liked)}
+          onClick={onClick}
           className={`card__like-button ${
             liked ? 'card__like-button_liked' : ''
           }`}
