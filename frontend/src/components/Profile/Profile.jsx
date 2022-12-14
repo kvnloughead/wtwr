@@ -3,20 +3,22 @@ import { func } from 'prop-types';
 
 import ItemCard from '../ItemCard/ItemCard';
 import './Profile.css';
-import avatar from '../../images/avatar.png';
-import { user } from '../../utils/constants';
 
 import AppContext from '../../contexts/AppContext';
 
 function Profile({ openModal }) {
-  const { clothing } = useContext(AppContext);
+  const { clothing, currentUser } = useContext(AppContext);
 
   return (
     <div className="profile">
       <aside>
         <div className="user">
-          <p className="name">{user.name}</p>
-          <img className="avatar" src={avatar} alt="User's avatar" />
+          <p className="name">{currentUser.name}</p>
+          <img
+            className="avatar"
+            src={currentUser.avatar}
+            alt="User's avatar"
+          />
         </div>
       </aside>
       <div className="container">
