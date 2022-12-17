@@ -17,11 +17,13 @@
 
 .card__header {
   position: absolute;
-  top: 12px;
+  top: 24px;
   z-index: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  width: 100%;
 }
 
 .card__name {
@@ -30,6 +32,7 @@
   border-radius: 4px;
   font-size: 16px;
   line-height: 1.25;
+  margin: 0;
 }
 
 .card__like-button {
@@ -40,6 +43,9 @@
   width: 18px;
   height: 15px;
   background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 12px;
 }
 
 .card__like-button_liked {
