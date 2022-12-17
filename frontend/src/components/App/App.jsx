@@ -156,7 +156,7 @@ function App() {
   }, []);
 
   return (
-    <div className="page">
+    <div className="app">
       <AppContext.Provider value={AppContextValue}>
         <Header openModal={openModal} location={location} />
 
