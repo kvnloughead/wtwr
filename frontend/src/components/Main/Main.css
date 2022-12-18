@@ -8,3 +8,9 @@
   font-size: 20px;
   line-height: 1.25;
 }
+
+@media screen and (max-width: 375px) {
+  .main__text {
+    font-size: 16px;
+  }
+}

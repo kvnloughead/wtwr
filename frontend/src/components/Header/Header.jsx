@@ -1,15 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { func, number, shape, string } from 'prop-types';
 
+import Nav from '../Nav/Nav';
 import logo from '../../images/logo.svg';
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
-import AppContext from '../../contexts/AppContext';
 import './Header.css';
 
 function Header({ openModal, location }) {
-  const { loggedIn, currentUser } = useContext(AppContext);
-
   const date = new Date().toLocaleString('default', {
     month: 'short',
     day: 'numeric',
@@ -28,49 +25,7 @@ function Header({ openModal, location }) {
         </span>
         <span className="header__place">{location.city}</span>
       </div>
-      <nav className="header__nav">
-        <ToggleSwitch />
-        {loggedIn ? (
-          <>
-            <button
-              className="button button_action_add"
-              aria-label="add-clothes"
-              type="button"
-              onClick={openModal}
-              data-modal="add-item"
-            />
-            <NavLink to="/profile" style={{ textDecoration: 'none' }}>
-              <div className="user">
-                <p className="name ellipsis">{currentUser.name}</p>
-                <img
-                  className="avatar"
-                  src={currentUser.avatar}
-                  alt="User's avatar"
-                />
-              </div>
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <button
-              type="button"
-              className="button"
-              onClick={openModal}
-              data-modal="login"
-            >
-              Login
-            </button>
-            <button
-              type="button"
-              className="button"
-              onClick={openModal}
-              data-modal="registration"
-            >
-              Sign up
-            </button>
-          </>
-        )}
-      </nav>
+      <Nav openModal={openModal} />
     </header>
   );
 }

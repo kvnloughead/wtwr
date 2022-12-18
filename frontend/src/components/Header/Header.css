@@ -21,65 +21,9 @@
   grid-area: time-and-place;
 }
 
-.header__nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 375px) {
   .header {
     display: grid;
-    grid-template-areas: 'logo nav' 'time-and-place time-and-place ';
-    justify-content: space-between;
-    row-gap: 12px;
-  }
-
-  .header__nav {
-    gap: 8px;
-    grid-area: nav;
-  }
-
-  .header .button {
-    margin: 0 0 0 auto;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .header {
-    grid-template-areas: 'logo nav' 'time-and-place nav';
-  }
-
-  .header__nav {
-    display: grid;
-    grid-template-rows: 40px;
-  }
-
-  .header .user {
-    grid-column: 1 / 4;
-    grid-row: 1 / 3;
-  }
-
-  .header .button {
-    margin: 0 56px 0 16px;
-  }
-
-  .header .button::before {
-    content: '';
-    background-image: url('../../images/plus.svg');
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 20px;
-    height: 20px;
-    display: block;
-  }
-
-  .header .button:hover::before {
-    height: 22px;
-  }
-
-  .header__time-and-place {
-    max-width: 150px;
+    grid-template-areas: 'logo menu' 'time-and-place time-and-place';
   }
 }
