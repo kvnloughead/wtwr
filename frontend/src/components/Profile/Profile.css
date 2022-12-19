@@ -17,6 +17,10 @@
   flex-basis: 25%;
   min-width: 250px;
   max-width: 346px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .profile h2 {
@@ -27,7 +31,11 @@
   display: inline-block;
 }
 
-.profile .button::before {
+.profile .user {
+  margin-bottom: 16px;
+}
+
+.profile .button[aria-label='add-clothes']::before {
   color: #00000099;
   content: '+ Add new';
 }

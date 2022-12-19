@@ -7,7 +7,7 @@ import './Profile.css';
 import AppContext from '../../contexts/AppContext';
 
 function Profile({ openModal }) {
-  const { clothing, currentUser } = useContext(AppContext);
+  const { clothing, currentUser, handleLogout } = useContext(AppContext);
 
   return (
     <div className="profile">
@@ -20,6 +20,14 @@ function Profile({ openModal }) {
             alt="User's avatar"
           />
         </div>
+        <button
+          type="button"
+          className="button"
+          onClick={handleLogout}
+          data-modal=""
+        >
+          Logout
+        </button>
       </aside>
       <div className="container">
         <div>

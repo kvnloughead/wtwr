@@ -98,6 +98,12 @@ function App() {
     return res;
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(undefined);
+    setLoggedIn(false);
+  };
+
   const getItems = async () => {
     const res = await api.getItems();
     if (res.message) {
@@ -123,6 +129,7 @@ function App() {
       setCurrentUser,
       toggleTempUnit,
       handleLikeClick,
+      handleLogout,
     }),
     [clothing, tempUnit, loggedIn, currentUser]
   );

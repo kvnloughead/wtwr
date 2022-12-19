@@ -7,7 +7,7 @@ import AppContext from '../../contexts/AppContext';
 import './Nav.css';
 
 function Nav({ openModal }) {
-  const { loggedIn, currentUser } = useContext(AppContext);
+  const { loggedIn, currentUser, handleLogout } = useContext(AppContext);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -32,6 +32,14 @@ function Nav({ openModal }) {
               onClick={openModal}
               data-modal="add-item"
             />
+            <button
+              type="button"
+              className="button"
+              onClick={handleLogout}
+              data-modal=""
+            >
+              Logout
+            </button>
             <NavLink to="/profile" style={{ textDecoration: 'none' }}>
               <div className="user">
                 <p className="name ellipsis">{currentUser.name}</p>
