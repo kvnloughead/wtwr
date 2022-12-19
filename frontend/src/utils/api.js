@@ -29,6 +29,16 @@ class Api {
       },
     }).then((res) => res.json());
 
+  updateProfile = (token, values) =>
+    fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ ...values }),
+    }).then((res) => res.json());
+
   getItems = () =>
     fetch(`${this._baseUrl}/items`, {
       headers: {

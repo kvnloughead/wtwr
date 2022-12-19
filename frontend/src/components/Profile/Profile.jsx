@@ -23,6 +23,14 @@ function Profile({ openModal }) {
         <button
           type="button"
           className="button"
+          onClick={openModal}
+          data-modal="edit-profile"
+        >
+          Change profile data
+        </button>
+        <button
+          type="button"
+          className="button"
           onClick={handleLogout}
           data-modal=""
         >

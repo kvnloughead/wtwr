@@ -7,8 +7,8 @@ import Profile from '../Profile/Profile';
 import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
 import AddItemModal from '../AddItemModal/AddItemModal';
+import EditProfileModal from '../EditProfileModal/EditProfileModal';
 import api from '../../utils/api';
-import './App.css';
 
 import { coords, apiKey } from '../../utils/constants';
 import getWeather from '../../utils/weatherApi';
@@ -17,12 +17,12 @@ import LoginModal from '../LoginModal/LoginModal';
 import RegistrationModal from '../RegistrationModal/RegistrationModal';
 import MessageModal from '../MessageModal/MessageModal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import './App.css';
 
 function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
-  // eslint-disable-next-line no-unused-vars
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [currentUser, setCurrentUser] = useState({});
   const [activeModal, setActiveModal] = useState('');
@@ -62,6 +62,15 @@ function App() {
       openMessageModal(message);
     } else {
       setClothing([{ ...res, _id: clothing.length }, ...clothing]);
+    }
+  };
+
+  const handleEditProfileSubmit = async (values) => {
+    const res = await api.updateProfile(token, values);
+    if (res.message) {
+      openMessageModal(message);
+    } else {
+      setCurrentUser(res);
     }
   };
 
@@ -190,6 +199,13 @@ function App() {
           title="New garment"
           closeModal={closeModal}
           handleAddItemSubmit={handleAddItemSubmit}
+        />
+
+        <EditProfileModal
+          activeModal={activeModal}
+          title="Change profile data"
+          closeModal={closeModal}
+          onSubmit={handleEditProfileSubmit}
         />
 
         <RegistrationModal
