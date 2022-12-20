@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
-import { func } from 'prop-types';
+import { shape, func, number } from 'prop-types';
 
 import ItemCard from '../ItemCard/ItemCard';
 import './Profile.css';
 
 import AppContext from '../../contexts/AppContext';
+import { getTempDescriptor } from '../../utils/helpers';
 
-function Profile({ openModal }) {
+function Profile({ openModal, weather }) {
   const { clothing, currentUser, handleLogout } = useContext(AppContext);
 
   return (
@@ -48,11 +49,15 @@ function Profile({ openModal }) {
             onClick={openModal}
           />
         </div>
-
         <ul role="list" className="cards">
-          {clothing.map((item) => (
-            <ItemCard key={item._id} data={item} openModal={openModal} />
-          ))}
+          {clothing
+            .filter((item) => item.owner === currentUser._id)
+            .filter(
+              (item) => item.weather === getTempDescriptor(weather.temp.F)
+            )
+            .map((item) => (
+              <ItemCard key={item._id} data={item} openModal={openModal} />
+            ))}
         </ul>
       </div>
     </div>
@@ -61,5 +66,6 @@ function Profile({ openModal }) {
 
 Profile.propTypes = {
   openModal: func.isRequired,
+  weather: shape({ temp: shape({ F: number, C: number }) }).isRequired,
 };
 export default Profile;

@@ -185,7 +185,11 @@ function App() {
             path="/profile"
             element={
               <ProtectedRoute loggedIn={loggedIn}>
-                <Profile openModal={openModal} clothing={clothing} />
+                <Profile
+                  openModal={openModal}
+                  clothing={clothing}
+                  weather={weather}
+                />
               </ProtectedRoute>
             }
             weather={weather}
