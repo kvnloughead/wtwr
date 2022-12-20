@@ -3,14 +3,14 @@
   margin: 0 auto;
 }
 
-.main__text {
-  margin-top: 40px;
+.main h2 {
+  margin: 40px 0 8px;
   font-size: 20px;
   line-height: 1.25;
 }
 
 @media screen and (max-width: 375px) {
-  .main__text {
+  .main h2 {
     font-size: 16px;
   }
 }

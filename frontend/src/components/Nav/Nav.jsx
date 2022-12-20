@@ -26,13 +26,6 @@ function Nav({ openModal }) {
         {loggedIn ? (
           <>
             <button
-              className="button button_action_add"
-              aria-label="add-clothes"
-              type="button"
-              onClick={openModal}
-              data-modal="add-item"
-            />
-            <button
               type="button"
               className="button"
               onClick={handleLogout}

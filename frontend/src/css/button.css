@@ -24,3 +24,8 @@
   line-height: 20px;
   color: #2f71e5;
 }
+
+.button[aria-label='add-clothes']::before {
+  color: #00000099;
+  content: '+ Add new';
+}

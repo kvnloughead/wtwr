@@ -35,11 +35,6 @@
   margin-bottom: 16px;
 }
 
-.profile .button[aria-label='add-clothes']::before {
-  color: #00000099;
-  content: '+ Add new';
-}
-
 .profile .cards {
   gap: 16px;
   justify-content: flex-start;

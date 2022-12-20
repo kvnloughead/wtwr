@@ -13,9 +13,18 @@ function Main({ openModal, weather }) {
   return (
     <main className="main">
       <WeatherCard weather={weather} />
-      <h2 className="main__text">
-        {`Today is ${weather.temp[tempUnit]} °${tempUnit} / You may want to wear:`}
-      </h2>
+      <div>
+        <h2>
+          {`Today is ${weather.temp[tempUnit]} °${tempUnit} / You may want to wear:`}
+        </h2>
+        <button
+          className="button"
+          aria-label="add-clothes"
+          type="button"
+          data-modal="add-item"
+          onClick={openModal}
+        />
+      </div>
       <CardList openModal={openModal} weather={weather} filters={['weather']} />
     </main>
   );
