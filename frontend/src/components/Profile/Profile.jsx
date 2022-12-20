@@ -1,14 +1,13 @@
 import React, { useContext } from 'react';
 import { shape, func, number } from 'prop-types';
 
-import ItemCard from '../ItemCard/ItemCard';
 import './Profile.css';
 
 import AppContext from '../../contexts/AppContext';
-import { getTempDescriptor } from '../../utils/helpers';
+import CardList from '../CardList/CardList';
 
 function Profile({ openModal, weather }) {
-  const { clothing, currentUser, handleLogout } = useContext(AppContext);
+  const { currentUser, handleLogout } = useContext(AppContext);
 
   return (
     <div className="profile">
@@ -49,16 +48,11 @@ function Profile({ openModal, weather }) {
             onClick={openModal}
           />
         </div>
-        <ul role="list" className="cards">
-          {clothing
-            .filter((item) => item.owner === currentUser._id)
-            .filter(
-              (item) => item.weather === getTempDescriptor(weather.temp.F)
-            )
-            .map((item) => (
-              <ItemCard key={item._id} data={item} openModal={openModal} />
-            ))}
-        </ul>
+        <CardList
+          openModal={openModal}
+          weather={weather}
+          filters={['weather', 'user']}
+        />
       </div>
     </div>
   );

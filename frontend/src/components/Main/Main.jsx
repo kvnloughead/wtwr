@@ -2,14 +2,13 @@ import React, { useContext } from 'react';
 import { shape, func, number } from 'prop-types';
 
 import WeatherCard from '../WeatherCard/WeatherCard';
-import ItemCard from '../ItemCard/ItemCard';
-import { getTempDescriptor } from '../../utils/helpers';
 import './Main.css';
 
 import AppContext from '../../contexts/AppContext';
+import CardList from '../CardList/CardList';
 
 function Main({ openModal, weather }) {
-  const { tempUnit, clothing } = useContext(AppContext);
+  const { tempUnit } = useContext(AppContext);
 
   return (
     <main className="main">
@@ -17,13 +16,7 @@ function Main({ openModal, weather }) {
       <h2 className="main__text">
         {`Today is ${weather.temp[tempUnit]} °${tempUnit} / You may want to wear:`}
       </h2>
-      <ul role="list" className="cards">
-        {clothing
-          .filter((item) => item.weather === getTempDescriptor(weather.temp.F))
-          .map((item) => (
-            <ItemCard key={item._id} data={item} openModal={openModal} />
-          ))}
-      </ul>
+      <CardList openModal={openModal} weather={weather} filters={['weather']} />
     </main>
   );
 }
