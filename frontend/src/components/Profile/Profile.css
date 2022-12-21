@@ -5,22 +5,14 @@
 
 .profile .container {
   margin: 0 auto;
+  max-width: 672px;
+  width: min-content;
 }
 
 .profile .avatar {
   order: -1;
   width: 56px;
   height: 56px;
-}
-
-.profile aside {
-  flex-basis: 25%;
-  min-width: 250px;
-  max-width: 346px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
 }
 
 .profile h2 {
@@ -38,22 +30,24 @@
 .profile .cards {
   gap: 16px;
   justify-content: flex-start;
+  min-width: 672px;
 }
 
 .profile .container {
-  max-width: 932px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
 @media screen and (max-width: 1000px) {
-  .profile aside {
-    display: none;
-  }
-
   .profile .cards {
     justify-content: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile .cards {
+    min-width: 344px;
   }
 }
 

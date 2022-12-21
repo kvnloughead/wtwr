@@ -1,0 +1,81 @@
+.sidebar {
+  flex-basis: 25%;
+  min-width: 250px;
+  max-width: 346px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  min-width: fit-content;
+}
+
+.sidebar button[data-modal='edit-profile']::before {
+  content: 'Change profile data';
+}
+
+.sidebar button[aria-label='logout']::before {
+  content: 'Logout';
+}
+
+@media screen and (max-width: 1000px) {
+  .sidebar {
+    flex-basis: auto;
+    margin-right: 20px;
+    box-shadow: 1px 1px 1px 2px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    padding: 10px 8px;
+    align-items: flex-start;
+  }
+
+  .sidebar .user .name {
+    display: none;
+  }
+
+  .sidebar_open .user .name {
+    display: block;
+  }
+
+  .sidebar_open {
+    max-width: 400px;
+  }
+
+  .sidebar button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+  }
+
+  .sidebar button::before {
+    display: block;
+    box-shadow: 1px 1px 1px 2px rgb(0 0 0 / 25%);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+  }
+
+  .sidebar button[data-modal='edit-profile']::before {
+    content: '';
+    background-image: url(../../images/pencil.png);
+    background-size: contain;
+    box-shadow: 1px 1px 1px 2px rgb(0 0 0 / 25%);
+  }
+
+  .sidebar button[aria-label='logout']::before {
+    content: '';
+    background-image: url(../../images/logout-icon.png);
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position: 25% 50%;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 2px rgb(0 0 0 / 25%);
+  }
+
+  .sidebar_open button[data-modal='edit-profile']::after {
+    content: 'Change profile data';
+  }
+
+  .sidebar_open button[aria-label='logout']::after {
+    content: 'Logout';
+  }
+}

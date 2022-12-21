@@ -34,12 +34,14 @@ function App() {
   const [tempUnit, setTempUnit] = useState('F');
 
   const openModal = (evt, card) => {
+    evt.stopPropagation();
     const { modal } = evt.target.dataset;
     setActiveModal(modal);
     if (modal === 'preview') setSelectedCard(card);
   };
 
-  const closeModal = (callback = () => {}) => {
+  const closeModal = (evt, callback = () => {}) => {
+    evt.stopPropagation();
     setActiveModal('');
     callback();
   };

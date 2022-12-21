@@ -1,42 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { shape, func, number } from 'prop-types';
 
 import './Profile.css';
 
-import AppContext from '../../contexts/AppContext';
 import CardList from '../CardList/CardList';
+import Sidebar from '../Sidebar/Sidebar';
 
 function Profile({ openModal, weather }) {
-  const { currentUser, handleLogout } = useContext(AppContext);
-
   return (
     <div className="profile">
-      <aside>
-        <div className="user">
-          <p className="name">{currentUser.name}</p>
-          <img
-            className="avatar"
-            src={currentUser.avatar}
-            alt="User's avatar"
-          />
-        </div>
-        <button
-          type="button"
-          className="button"
-          onClick={openModal}
-          data-modal="edit-profile"
-        >
-          Change profile data
-        </button>
-        <button
-          type="button"
-          className="button"
-          onClick={handleLogout}
-          data-modal=""
-        >
-          Logout
-        </button>
-      </aside>
+      <Sidebar openModal={openModal} />
       <div className="container">
         <div>
           <h2>Your items</h2>
@@ -62,4 +35,5 @@ Profile.propTypes = {
   openModal: func.isRequired,
   weather: shape({ temp: shape({ F: number, C: number }) }).isRequired,
 };
+
 export default Profile;

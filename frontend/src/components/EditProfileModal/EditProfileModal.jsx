@@ -12,7 +12,7 @@ function EditProfileModal({ activeModal, closeModal, onSubmit }) {
   const { values, errors, isValid, handleChange, resetForm } =
     useForm(currentUser);
 
-  const closeAndReset = () => closeModal(resetForm);
+  const closeAndReset = (evt) => closeModal(evt, resetForm);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

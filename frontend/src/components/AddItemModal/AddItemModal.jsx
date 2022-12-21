@@ -11,7 +11,7 @@ function AddItemModal({ activeModal, closeModal, handleAddItemSubmit }) {
     weather: 'hot',
   });
 
-  const closeAndReset = () => closeModal(resetForm);
+  const closeAndReset = (evt) => closeModal(evt, resetForm);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

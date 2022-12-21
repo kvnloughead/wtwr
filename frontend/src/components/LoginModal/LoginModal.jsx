@@ -8,7 +8,7 @@ import useForm from '../../hooks/useForm';
 function LoginModal({ closeModal, activeModal, openModal, onLogin }) {
   const { values, errors, isValid, handleChange, resetForm } = useForm();
 
-  const closeAndReset = () => closeModal(resetForm);
+  const closeAndReset = (evt) => closeModal(evt, resetForm);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
